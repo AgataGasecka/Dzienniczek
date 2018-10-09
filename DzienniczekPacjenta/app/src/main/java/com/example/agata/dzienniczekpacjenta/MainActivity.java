@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
      }
 
      public void singIn(View view){
-         Intent intent = new Intent(this, SingIn.class);
+         Intent intent = new Intent(this, Home.class);
          startActivity(intent);
      }
 }
