@@ -30,6 +30,10 @@
         android:layout_marginBottom="30dp"
         android:text="USTAWIENIA"
         app:layout_constraintBottom_toBottomOf="parent"
+<<<<<<< HEAD
+=======
+        android:onClick="goToSettings"
+>>>>>>> zuzia
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
