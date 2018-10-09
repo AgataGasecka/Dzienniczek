@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">DzienniczekPacjenta</string>
+    <string name="app_name">Dzienniczek Pacjenta</string>
+    <string name="signIn">Zaloguj się</string>
+    <string name="singUp">Stwórz konto</string>
+    <string name="save">Zapisz</string>
 </resources>
