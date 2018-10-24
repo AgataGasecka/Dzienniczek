@@ -30,7 +30,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".Home"></activity>
+        <activity android:name=".Home" />
+        <activity android:name=".Calendar"></activity>
     </application>
 
 </manifest>
