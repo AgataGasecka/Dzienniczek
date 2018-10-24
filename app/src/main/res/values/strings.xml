@@ -3,4 +3,20 @@
     <string name="signIn">Zaloguj się</string>
     <string name="singUp">Stwórz konto</string>
     <string name="save">Zapisz</string>
+    <string name="settings">USTAWIENIA</string>
+    <string name="calendar">KALENDARZ WIZYT</string>
+    <string name="viewCalendar">Widok kalendarza</string>
+    <string name="addMeasurement">DODAJ POMIAR</string>
+    <string name="userName">Imię</string>
+    <string name="userSurname">Nazwisko</string>
+    <string name="email">E-mail</string>
+    <string name="password">Hasło</string>
+    <string name="repeatPassword">Powtórz hasło</string>
+    <string-array name="calendar_array">
+        <item>Dzień</item>
+        <item>Tydzień</item>
+        <item>Miesiąc</item>
+        <item>Rok</item>
+    </string-array>
+
 </resources>
