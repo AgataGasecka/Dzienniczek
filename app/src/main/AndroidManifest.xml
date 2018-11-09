@@ -31,8 +31,9 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".Home" />
-        <activity android:name=".Calendar"></activity>
-        <activity android:name=".Settings"/>
+        <activity android:name=".Calendar" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Settings2"></activity>
     </application>
 
 </manifest>

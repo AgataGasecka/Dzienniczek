@@ -23,11 +23,29 @@
     <string name="aboutMakingMeasurement">Konieczności wykonania pomiaru</string>
     <string name="next">Dalej</string>
     <string name="wantRemindersAbout">Chcę otrzymywać powiadomienia o</string>
+    <string name="newNorm">Nowa norma</string>
+    <string name="norm">Norma</string>
+    <string name="changeNorm">Zmień normę</string>
+    <string name="patientData">Dane pacjenta</string>
+    <string name="selectParameter">Wybierz parametr</string>
     <string-array name="calendar_array">
         <item>Dzień</item>
         <item>Tydzień</item>
         <item>Miesiąc</item>
         <item>Rok</item>
+    </string-array>
+    <string-array name="parameters_array">
+        <item>Ciśnienie</item>
+        <item>Cukier</item>
+        <item>Masa ciała</item>
+        <item>Temperatura</item>
+        <item>Puls</item>
+    </string-array>
+    <string-array name="reminders_array">
+        <item>Tego samego dnia</item>
+        <item>1 dzień przed</item>
+        <item>3 dni przed</item>
+        <item>Tydzień przed</item>
     </string-array>
 
 </resources>
