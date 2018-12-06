@@ -56,8 +56,8 @@ public class NewAccount extends AppCompatActivity {
         }
         else{
             if(repeatPassword.equals(password)) {
-                helper.insertNewUser(email, password);
-                Intent intent = new Intent(this, Settings.class);
+                helper.insertNewUser(email, password, name, surname);
+                Intent intent = new Intent(this, SavedUserData.class);
                 startActivity(intent);
             }
             else {
