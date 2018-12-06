@@ -14,19 +14,31 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Data" />
+            android:background="@color/colorAccent"
+            android:text="Data"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Godzina" />
+            android:background="@color/colorAccent"
+            android:text="Godzina"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Wynik pomiaru" />
+            android:background="@color/colorAccent"
+            android:text="Wynik"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
     </LinearLayout>
     <ListView
         android:id="@+id/listView"

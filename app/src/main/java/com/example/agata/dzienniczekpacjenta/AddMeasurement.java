@@ -23,7 +23,7 @@ public class AddMeasurement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_measurement);
-        lv = (ListView) findViewById(R.id.listview);
+        //lv = (ListView) findViewById(R.id.listview);
         Button btnAdd = (Button) findViewById(R.id.dodajpomiar);
         Button btnView = (Button) findViewById(R.id.wyswietl_pomiary);
         final EditText dataPomiaru =(EditText) findViewById(R.id.dataPomiaru);
