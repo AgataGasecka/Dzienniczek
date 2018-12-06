@@ -25,4 +25,11 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToAddMeasurement(View view){
+        Intent intent = new Intent(this, AddMeasurement.class);
+        startActivity(intent);
+    }
+
+
+
 }

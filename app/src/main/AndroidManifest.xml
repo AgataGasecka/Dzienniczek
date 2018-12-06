@@ -53,6 +53,8 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".VisitDetails"></activity>
+        <activity android:name=".AddMeasurement" />
+        <activity android:name=".ListMeasurementDataActivity"></activity>
     </application>
 
 </manifest>

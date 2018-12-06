@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 
@@ -14,6 +15,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String MEASUREMETS_TABLE = "measurements";
     public static final String SETTINGS_TABLE = "settings";
     private String USUWANIE_DO_TESTOW = "DELETE FROM USERS";
+    private static final String TAG = "DatabaseHelper";
+
+    public static final String Table_Column_data="DATE";
+
+    public static final String Table_Column_1_hour="HOUR";
+
+    public static final String Table_Column_2_measurement="MEASUREMENT";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -49,9 +57,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         String measuremetsQuery = "create table " + MEASUREMETS_TABLE +
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "USERID INTEGER, " +
-                "NAME TEXT, " +
-                "VALUE TEXT)";
+                "USER_ID INTEGER, " +
+                "DATE TEXT, " +
+                " HOUR TEXT," +
+                "MEASUREMENT TEXT)";
         db.execSQL(measuremetsQuery);
 
         String settingsQuery = "create table " + SETTINGS_TABLE +
@@ -131,5 +140,32 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             return false;
         }
 
+    }
+
+    public boolean addMeasurementData(String userid, String date, String hour, String measurement){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("USER_ID", userid);
+        contentValues.put("DATE", date);
+        contentValues.put("HOUR", hour);
+        contentValues.put("MEASUREMENT", measurement);
+
+        Log.d(TAG, "addData: Adding data to " + MEASUREMETS_TABLE);
+
+        long result = db.insert(MEASUREMETS_TABLE, null, contentValues);
+
+        //if date as inserted incorrectly it will return -1
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Cursor viewMeasurementData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query= "Select * from " + MEASUREMETS_TABLE;
+        Cursor cursor=db.rawQuery(query, null);
+        return cursor;
     }
 }

@@ -14,6 +14,7 @@
         android:layout_marginTop="130dp"
         android:layout_marginEnd="117dp"
         android:layout_marginBottom="30dp"
+        android:onClick="goToAddMeasurement"
         android:text="@string/addMeasurement"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="parent"
