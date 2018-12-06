@@ -1,5 +1,7 @@
 package com.example.agata.dzienniczekpacjenta;
 
+import android.app.AlertDialog;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -19,9 +21,8 @@ public class Home extends AppCompatActivity {
     }
 
     public void goToCalendar(View view){
-        Intent intent = new Intent(this, Calendar.class);
+        Intent intent = new Intent(this, Callendar.class);
         startActivity(intent);
     }
-
 
 }

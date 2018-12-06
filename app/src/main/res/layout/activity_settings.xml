@@ -7,45 +7,44 @@
     tools:context=".Settings">
 
     <EditText
-        android:id="@+id/editText5"
-        android:layout_width="154dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="66dp"
+        android:id="@+id/patientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="54dp"
 
-        android:layout_marginEnd="110dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
         android:text="@string/userName"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toStartOf="@+id/editText5"
+        app:layout_constraintBottom_toTopOf="@+id/patientName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="190dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="128dp"
         android:text="@string/patientData"
+        android:textColor="@color/colorText"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText5"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,125 +52,134 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:text="@string/userSurname"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/patientSurname"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/patientName" />
 
     <EditText
-        android:id="@+id/editText4"
-        android:layout_width="154dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="66dp"
+        android:id="@+id/patientSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
-        android:id="@+id/editText6"
-        android:layout_width="154dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="66dp"
+        android:id="@+id/patientBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:inputType="date"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="27dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:text="@string/birthDate"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText6"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/patientBirthday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/patientSurname" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="91dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:text="@string/pesel"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText8"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/patientPesel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/patientBirthday" />
 
     <EditText
-        android:id="@+id/editText8"
-        android:layout_width="154dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="66dp"
+        android:id="@+id/patientPesel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:inputType="number"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="112dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
         android:text="@string/sex"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/radioGroup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/patientPesel" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="153dp"
         android:layout_height="64dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/editText8"
-        tools:layout_editor_absoluteX="164dp">
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/patientPesel">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radioFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/female"
             tools:layout_editor_absoluteX="164dp"
-            tools:layout_editor_absoluteY="238dp" />
+            tools:layout_editor_absoluteY="238dp"
+            android:onClick="onRadioButtonClicked"/>
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/male"
             tools:layout_editor_absoluteX="157dp"
-            tools:layout_editor_absoluteY="279dp" />
+            tools:layout_editor_absoluteY="279dp"
+            android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
 
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
-        android:onClick="goToHomePage"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="7dp"
+        android:onClick="saveDataForNewPatient"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 </android.support.constraint.ConstraintLayout>

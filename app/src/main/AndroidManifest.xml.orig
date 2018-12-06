@@ -26,7 +26,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".Home" />
-        <activity android:name=".Callendar" />
+        <activity android:name=".Calendar" />
         <activity android:name=".Settings"
             android:parentActivityName=".Home">
             <meta-data
@@ -52,7 +52,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+<<<<<<< Updated upstream
+=======
+        <activity android:name=".Home" />
+        <activity android:name=".Callendar" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Settings2" />
         <activity android:name=".VisitDetails"></activity>
+>>>>>>> Stashed changes
     </application>
 
 </manifest>
