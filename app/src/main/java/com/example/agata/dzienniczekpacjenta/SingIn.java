@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.app.AlertDialog;
 import android.os.Build;
+import android.widget.ImageButton;
 
 public class SingIn extends AppCompatActivity {
     public String email;
@@ -33,8 +34,14 @@ public class SingIn extends AppCompatActivity {
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);
         }
-        else
-            showAlert();
+        else {
+            //showAlert(); do odkomentowania
+            //TODO do usuniecia
+            //start
+            Intent intent = new Intent(this, Home.class);
+            startActivity(intent);
+            //koniec
+        }
     }
 
     private void showAlert(){
@@ -49,4 +56,7 @@ public class SingIn extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+
+
 }
