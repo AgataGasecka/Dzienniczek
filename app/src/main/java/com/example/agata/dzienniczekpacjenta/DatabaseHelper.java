@@ -10,6 +10,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "dzienniczek.db";
     public static final String USERS_TABLE = "users";
     public static final String PATIENT_TABLE = "patient";
+    public static final String VISITS_TABLE = "visits";
     public static final String MEASUREMETS_TABLE = "measurements";
     public static final String SETTINGS_TABLE = "settings";
     private String USUWANIE_DO_TESTOW = "DELETE FROM USERS";
@@ -36,6 +37,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "PESEL TEXT, " +
                 "SEX BOOLEAN)";
         db.execSQL(patientQuery);
+
+        String visitsQuery  = "create table " + VISITS_TABLE +
+                "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "DATE TEXT, " +
+                "HOUR TEXT, " +
+                "DOCTOR TEXT, " +
+                "PLACE TEXT, " +
+                "INFORMATION TEXT)";
+        db.execSQL(visitsQuery);
 
         String measuremetsQuery = "create table " + MEASUREMETS_TABLE +
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -69,6 +79,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 contentValues.put("SURNAME", surname);
                 db.insert(USERS_TABLE, null, contentValues);
             }
+        }
+    }
+
+    public void insertNewVisit(String visitDate, String visitHour, String doctor, String place, String information) {
+
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("DATE", visitDate);
+                contentValues.put("HOUR", visitHour);
+                contentValues.put("DOCTOR", doctor);
+                contentValues.put("PLACE", place);
+                contentValues.put("INFORMATION", information);
+                db.insert(VISITS_TABLE, null, contentValues);
+
         }
     }
 

@@ -21,7 +21,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void goToCalendar(View view){
-        Intent intent = new Intent(this, Calendar.class);
+        Intent intent = new Intent(this, Callendar.class);
         startActivity(intent);
     }
 
