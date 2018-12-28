@@ -26,7 +26,12 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".Home" />
-        <activity android:name=".Callendar" />
+        <activity android:name=".Callendar"
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home"/>
+        </activity>
         <activity android:name=".Settings"
             android:parentActivityName=".Home">
             <meta-data
@@ -41,9 +46,9 @@
         </activity>
         <activity android:name=".SingIn"
             android:parentActivityName=".MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
         </activity>
         <activity
             android:name=".SavedUserData"
@@ -52,8 +57,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".VisitDetails"></activity>
-        <activity android:name=".AddMeasurement" />
+        <activity android:name=".VisitDetails"
+            android:parentActivityName=".Callendar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Callendar" />
+        </activity>
+        <activity android:name=".AddMeasurement"
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home"/>
+        </activity>/>
         <activity android:name=".ListMeasurementDataActivity"></activity>
     </application>
 
