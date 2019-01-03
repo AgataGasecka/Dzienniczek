@@ -9,24 +9,30 @@ import android.view.View;
 
 public class Home extends AppCompatActivity {
 
+    int id = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_home);
     }
 
     public void goToSettings(View view){
         Intent intent = new Intent(this, Settings.class);
+        intent.putExtra("ID", id);
         startActivity(intent);
     }
 
     public void goToCalendar(View view){
         Intent intent = new Intent(this, Callendar.class);
+        intent.putExtra("ID", id);
         startActivity(intent);
     }
 
     public void goToAddMeasurement(View view){
         Intent intent = new Intent(this, AddMeasurement.class);
+        intent.putExtra("ID", id);
         startActivity(intent);
     }
 

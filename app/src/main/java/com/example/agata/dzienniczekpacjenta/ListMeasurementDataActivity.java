@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListMeasurementDataActivity extends AppCompatActivity {
-
+    int id;
     DatabaseHelper mDatabaseHelper;
     SQLiteDatabase db;
     ListAdapter listAdapter;
@@ -21,6 +21,7 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_list_measurement_data);
         mListView = findViewById(R.id.listView);
 

@@ -13,7 +13,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 public class VisitDetails extends AppCompatActivity {
-
+    int id;
     DatabaseHelper helper;
     String visitDate;
     String visitHour;
@@ -25,6 +25,7 @@ public class VisitDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_visit_details);
         helper = new DatabaseHelper(this);
         TextView selectedD = findViewById(R.id.selectedDate);
@@ -62,6 +63,7 @@ public class VisitDetails extends AppCompatActivity {
             helper.insertNewVisit(visitDate, visitHour, doctor, place, information );
 
                 Intent intent = new Intent(VisitDetails.this, Callendar.class);
+                intent.putExtra("ID", id);
                 startActivity(intent);
             }
         });

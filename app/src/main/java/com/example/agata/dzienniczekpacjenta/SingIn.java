@@ -26,13 +26,18 @@ public class SingIn extends AppCompatActivity {
     public void goToHomePage(View view){
         email = ((EditText)findViewById(R.id.editText)).getText().toString();
         password = ((EditText)findViewById(R.id.editText2)).getText().toString();
-
+        int id = 0;
         DatabaseHelper helper = new DatabaseHelper(this);
-        String query = "Select * from " + DatabaseHelper.USERS_TABLE + " WHERE EMAIL=\"" + email + "\" AND PASSWORD=\"" + password + "\"";
         SQLiteDatabase db = helper.getWritableDatabase();
-        Cursor cursor= db.rawQuery(query,null);
+        Cursor cursor = db.query(DatabaseHelper.USERS_TABLE, new String[]{"ID", "EMAIL", "PASSWORD"}, "EMAIL=\"" + email + "\" AND PASSWORD=\"" + password + "\"", null, null, null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
+            id = cursor.getInt(cursor.getColumnIndex("ID"));
+        }
+
         if(cursor.getCount()>0) {
             Intent intent = new Intent(this, Home.class);
+            intent.putExtra("ID",id);
             startActivity(intent);
         }
         else {

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class AddMeasurement extends AppCompatActivity {
 
+    int id;
     DatabaseHelper controllerdb = new DatabaseHelper(this);
     SQLiteDatabase db;
     private ArrayList<String> email = new ArrayList<String>();
@@ -21,6 +22,7 @@ public class AddMeasurement extends AppCompatActivity {
     ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        id = getIntent().getIntExtra("ID", 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_measurement);
         //lv = (ListView) findViewById(R.id.listview);
@@ -51,6 +53,7 @@ public class AddMeasurement extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ListMeasurementDataActivity.class);
+                intent.putExtra("ID", id);
                 startActivity(intent);
             }
         });
