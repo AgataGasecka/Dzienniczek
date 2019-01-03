@@ -62,9 +62,11 @@ public class Settings extends AppCompatActivity {
 
 
         if ( !nameMatcher.find() | !surnameMatcher.find() | !birthdayMatcher.find()| !peselMatcher.find() | !patientSexChecked){
-            title = "Blad";
+            /*title = "Blad";
             message =  "Wpisz poprawne dane";
-            showAlert(title, message);
+            showAlert(title, message);*/
+            Intent intent = new Intent(this, Settings2.class);
+            startActivity(intent);
         }
         else{
                 boolean saved = helper.updateUser(patientName, patientSurname, patientBirthday, patientPesel, patientSex, id);

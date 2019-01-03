@@ -3,25 +3,47 @@ package com.example.agata.dzienniczekpacjenta;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Settings2 extends AppCompatActivity {
     int id;
+    String measurement_type;
+    String measurement_standard;
+    EditText newNorm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_settings2);
 
+        newNorm = findViewById(R.id.editText7);
         Spinner spinnerPatameter = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.parameters_array, android.R.layout.simple_spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPatameter.setAdapter(adapter);
+
+        spinnerPatameter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(Settings2.this, "Wybrano opcję" + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+                measurement_type=parent.getItemAtPosition(position).toString();
+                setMeasurementStandard();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         Spinner spinnerVisits = findViewById(R.id.spinner3);
         Spinner spinnerMedicines = findViewById(R.id.spinner4);
@@ -36,10 +58,38 @@ public class Settings2 extends AppCompatActivity {
         spinnerMeasurements.setAdapter(adapterMedicines);
     }
 
-    public void setNewNorm(View view){
 
-        EditText newNorm = findViewById(R.id.editText7);
+    private void setMeasurementStandard(){
+        TextView standard = (TextView) findViewById(R.id.normaPomiaru);
+
+        switch(measurement_type){
+            case "Ciśnienie":
+                measurement_standard = "120/80";
+                standard.setText(measurement_standard + " mmHg");
+                break;
+            case "Cukier":
+                measurement_standard = "70-100";
+                standard.setText(measurement_standard + " mg/dl");
+                break;
+            case "Waga":
+                standard.setText("Wpisz swoją normę");
+                break;
+            case "Temperatura":
+                measurement_standard = "36.6";
+                standard.setText(measurement_standard + " ℃");
+                break;
+            case "Puls":
+                measurement_standard = "70";
+                standard.setText(measurement_standard + " uderzeń/min");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void setNewNorm(View view){
         newNorm.setVisibility(View.VISIBLE);
+        newNorm.setHint("Nowa norma");
     }
 
     public void setReminderAboutVisits(View view){
@@ -66,6 +116,10 @@ public class Settings2 extends AppCompatActivity {
             whenToRemindAboutMeasurement.setVisibility(View.VISIBLE);
         else if(!remindAboutMeasurementCheckbox.isChecked())
             whenToRemindAboutMeasurement.setVisibility(View.GONE);
+    }
+
+    private void getInfo(){
+        measurement_standard = newNorm.getText().toString();
     }
 
 }

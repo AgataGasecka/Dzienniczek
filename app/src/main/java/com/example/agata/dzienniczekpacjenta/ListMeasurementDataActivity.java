@@ -69,7 +69,8 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
             case "Puls":
                 unit.setText("uderzenia/min");
                 break;
-
+            default:
+                break;
         }
 
     }

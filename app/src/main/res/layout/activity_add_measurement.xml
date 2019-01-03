@@ -96,7 +96,7 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/textView21"
         app:layout_constraintEnd_toStartOf="@+id/dataPomiaru"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rodzajParametruPomiaru" />
 
