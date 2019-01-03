@@ -49,6 +49,8 @@ public class ListAdapterVisit extends BaseAdapter {
 
         final String dateOfVisit = visits.get(position).getDate();
         final String hourOfVisit = visits.get(position).getHour();
+        final String doctor = visits.get(position).getDoctor();
+        final String place = visits.get(position).getPlace();
         date.setText(dateOfVisit);
         hour.setText(hourOfVisit);
 
@@ -57,15 +59,12 @@ public class ListAdapterVisit extends BaseAdapter {
         visitDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String doctor = ListOfVisits.doctor;
-                String place = ListOfVisits.place;
-                String info = ListOfVisits.info;
                 Intent intent = new Intent(context,VisitDetails.class);
                 intent.putExtra("selectedDate",dateOfVisit);
                 intent.putExtra( "hourOfVisit", hourOfVisit);
                 intent.putExtra("doctor", doctor);
                 intent.putExtra("place", place);
-                intent.putExtra("info", info);
+                intent.putExtra("info", "brak");
                 intent.putExtra("editMode", "yes");
 
                 context.startActivity(intent);
