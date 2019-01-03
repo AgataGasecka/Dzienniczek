@@ -42,20 +42,15 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
                 "EMAIL TEXT, " +
                 "PASSWORD TEXT, " +
                 "NAME TEXT, " +
-                "SURNAME TEXT)";
-        db.execSQL(usersQuery);
-
-        String patientQuery  = "create table " + PATIENT_TABLE +
-                "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "NAME TEXT, " +
                 "SURNAME TEXT, " +
                 "BIRTHDAY TEXT, " +
                 "PESEL TEXT, " +
                 "SEX BOOLEAN)";
-        db.execSQL(patientQuery);
+        db.execSQL(usersQuery);
 
         String visitsQuery  = "create table " + VISITS_TABLE +
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "USER_ID INTEGER, " +
                 "DATE TEXT, " +
                 "HOUR TEXT, " +
                 "DOCTOR TEXT, " +
@@ -74,12 +69,10 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
 
         String settingsQuery = "create table " + SETTINGS_TABLE +
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "USERID INTEGER, " +
+                "USER_ID INTEGER, " +
                 "PARAMETERNAME TEXT, " +
                 "DEFAULTVALUE TEXT)";
         db.execSQL(settingsQuery);
-
-
     }
 
     @Override
@@ -145,18 +138,21 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         }
     }
 
-    public boolean insertNewPatient(String patientName, String patientSurname, String patientBirthday, String patientPesel, Boolean patientSex) {
-        String Query = "Select * from " + PATIENT_TABLE + " where PESEL=" + patientPesel;
+    public boolean updateUser(String patientName, String patientSurname, String patientBirthday, String patientPesel, Boolean patientSex, int userId) {
+        //String Query = "Select * from " + USERS_TABLE + " where USER_ID=" + userId;
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
-            if(!ifDataExists(db, PATIENT_TABLE, "PESEL", patientPesel)) {
+            if(!ifDataExists(db, USERS_TABLE, "ID", String.valueOf(userId))) {
+             //   Cursor cursor = db.rawQuery("UPDATE " + USERS_TABLE + " SET NAME='"+ patientName + "', SURNAME='" + patientSurname + "', BIRTHDAY='" + patientBirthday + "', PESEL='" + patientPesel + "', SEX=" + patientSex + " WHERE ID=" + userId, null);
+
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("NAME", patientName);
                 contentValues.put("SURNAME", patientSurname);
                 contentValues.put("BIRTHDAY", patientBirthday);
                 contentValues.put("PESEL", patientPesel);
                 contentValues.put("SEX", patientSex);
-                db.insert(PATIENT_TABLE, null, contentValues);
+                db.update(USERS_TABLE, contentValues,"ID=" + userId, null);
+                //db.insert(PATIENT_TABLE, null, contentValues);
 
                 return true;
             }

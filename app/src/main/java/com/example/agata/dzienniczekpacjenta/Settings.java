@@ -67,7 +67,7 @@ public class Settings extends AppCompatActivity {
             showAlert(title, message);
         }
         else{
-                boolean saved = helper.insertNewPatient(patientName, patientSurname, patientBirthday, patientPesel, patientSex );
+                boolean saved = helper.updateUser(patientName, patientSurname, patientBirthday, patientPesel, patientSex, id);
                 if(saved){
                     title = "Zapisano dane";
                     message = "Dane pacjenta zostały zapisane.";
