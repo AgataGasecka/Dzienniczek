@@ -65,6 +65,7 @@ intent.putExtra("hourOfVisit", hour);
 
     public void goToVisitsList(View view){
         Intent intent = new Intent(this, ListOfVisits.class);
+        intent.putExtra("ID", id);
         startActivity(intent);
     }
 

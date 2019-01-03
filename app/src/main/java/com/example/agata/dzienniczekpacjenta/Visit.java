@@ -6,13 +6,15 @@ public class Visit {
     private String doctor;
     private String place;
     private String info;
+    private int id;
 
-    public Visit(String date, String hour, String doctor, String place, String info) {
+    public Visit(String date, String hour, String doctor, String place, String info, int id) {
         this.date = date;
         this.hour = hour;
         this.doctor = doctor;
         this.place = place;
         this.info = info;
+        this.id = id;
     }
 
     public Visit(String date, String hour) {
@@ -39,4 +41,6 @@ public class Visit {
     public String getInfo() {
         return info;
     }
+
+    public int getID() { return id; }
 }
