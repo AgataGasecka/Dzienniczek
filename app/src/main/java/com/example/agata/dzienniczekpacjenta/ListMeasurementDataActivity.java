@@ -53,7 +53,6 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
                 populateFilterListView();
             }
 
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
