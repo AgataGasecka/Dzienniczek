@@ -99,10 +99,11 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         }
     }
 
-    public void insertNewVisit(String visitDate, String visitHour, String doctor, String place, String information) {
+    public void insertNewVisit(String visitDate, String visitHour, String doctor, String place, String information, int userId) {
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             ContentValues contentValues = new ContentValues();
+            contentValues.put("USER_ID", userId);
             contentValues.put("DATE", visitDate);
             contentValues.put("HOUR", visitHour);
             contentValues.put("DOCTOR", doctor);
@@ -114,7 +115,7 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         }
     }
 
-    public void updateVisit(String visitDate, String visitHour, String doctor, String place, String information) {
+    public void updateVisit(String visitDate, String visitHour, String doctor, String place, String information, int userId) {
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             ContentValues contentValues = new ContentValues();
@@ -123,31 +124,23 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
             contentValues.put("DOCTOR", doctor);
             contentValues.put("PLACE", place);
             contentValues.put("INFORMATION", information);
-            //db.update(VISITS_TABLE, contentValues,"_id="+ID, null);
+            db.update(VISITS_TABLE, contentValues,"USER_ID="+userId, null);
 
         }
     }
 
-    public void deleteVisit(String visitDate, String visitHour, String doctor, String place, String information) {
+    public void deleteVisit(String visitDate, String visitHour, String doctor, String place, String information, int id) {
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("DATE", visitDate);
-            contentValues.put("HOUR", visitHour);
-            contentValues.put("DOCTOR", doctor);
-            contentValues.put("PLACE", place);
-            contentValues.put("INFORMATION", information);
-            //db.delete(VISITS_TABLE, "_id="ID, null);
+            db.delete(VISITS_TABLE, "ID=" + id, null);
 
         }
     }
 
     public boolean updateUser(String patientName, String patientSurname, String patientBirthday, String patientPesel, Boolean patientSex, int userId) {
-        //String Query = "Select * from " + USERS_TABLE + " where USER_ID=" + userId;
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             if(!ifDataExists(db, USERS_TABLE, "ID", String.valueOf(userId))) {
-             //   Cursor cursor = db.rawQuery("UPDATE " + USERS_TABLE + " SET NAME='"+ patientName + "', SURNAME='" + patientSurname + "', BIRTHDAY='" + patientBirthday + "', PESEL='" + patientPesel + "', SEX=" + patientSex + " WHERE ID=" + userId, null);
 
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("NAME", patientName);
@@ -156,8 +149,6 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
                 contentValues.put("PESEL", patientPesel);
                 contentValues.put("SEX", patientSex);
                 db.update(USERS_TABLE, contentValues,"ID=" + userId, null);
-                //db.insert(PATIENT_TABLE, null, contentValues);
-
                 return true;
             }
             else {
@@ -221,12 +212,12 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         Cursor cursor=db.rawQuery(query, new String[]{measurement_type});
         return cursor;
     }
-
-    public Cursor viewListOfVisits() {
+    
+    public Cursor viewListOfVisits(int userId) {
         Cursor cursor = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String query= "Select * from " + VISITS_TABLE;
-         cursor=db.rawQuery(query, null);
+        String query= "Select * from " + VISITS_TABLE + " where USER_ID=" + userId;
+        cursor=db.rawQuery(query, null);
         return cursor;
     }
 
