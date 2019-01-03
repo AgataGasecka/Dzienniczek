@@ -97,7 +97,7 @@ public class AddMeasurement extends AppCompatActivity {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListMeasurementDataActivity.class);
+                Intent intent = new Intent(getApplicationContext(), VisualizationActivity.class);
                 intent.putExtra("ID", id);
                 startActivity(intent);
             }

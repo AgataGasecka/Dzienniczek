@@ -6,6 +6,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.github.mikephil.charting.data.BarEntry;
+
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String DATABASE_NAME = "dzienniczek1.db";
@@ -217,12 +221,36 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         Cursor cursor=db.rawQuery(query, new String[]{measurement_type});
         return cursor;
     }
-    
+
     public Cursor viewListOfVisits() {
         Cursor cursor = null;
         SQLiteDatabase db = this.getReadableDatabase();
         String query= "Select * from " + VISITS_TABLE;
          cursor=db.rawQuery(query, null);
         return cursor;
+    }
+
+    public ArrayList<String> queryXData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> xNewData = new ArrayList<String>();
+        String query = "SELECT " + Table_Column_data + " FROM " + MEASUREMETS_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            xNewData.add(cursor.getString(cursor.getColumnIndex(Table_Column_data)));
+        }
+        cursor.close();
+        return xNewData;
+    }
+
+    public ArrayList<Integer> queryYData(){
+        ArrayList<Integer> yNewData = new ArrayList<Integer>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + Table_Column_2_measurement + " FROM " + MEASUREMETS_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            yNewData.add(cursor.getInt(cursor.getColumnIndex(Table_Column_2_measurement)));
+        }
+        cursor.close();
+        return yNewData;
     }
 }
