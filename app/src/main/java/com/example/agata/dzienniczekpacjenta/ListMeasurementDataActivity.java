@@ -25,6 +25,7 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
     List<Pomiar> wynikiPomiarow;
     public String measurement_type;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
