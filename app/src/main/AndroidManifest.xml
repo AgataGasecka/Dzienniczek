@@ -68,8 +68,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home"/>
-        </activity>/>
-        <activity android:name=".ListMeasurementDataActivity"></activity>
+        </activity>
+        <activity android:name=".ListMeasurementDataActivity"
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home"/>
+        </activity>
     </application>
 
 </manifest>

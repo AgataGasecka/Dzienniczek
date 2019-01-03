@@ -30,6 +30,11 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToListMeasurementDataActivity(View view){
+        Intent intent = new Intent(this, ListMeasurementDataActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }

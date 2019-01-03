@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,8 +36,9 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
         parameters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ListMeasurementDataActivity.this, "Wybrano opcję" + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListMeasurementDataActivity.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
                 measurement_type=parent.getItemAtPosition(position).toString();
+                setUnit();
                 populateFilterListView();
             }
 
@@ -47,7 +49,29 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
         });
     }
 
+    private void setUnit(){
+        TextView unit = (TextView) findViewById(R.id.jednostkaPomiaru);
 
+        switch(measurement_type){
+            case "Ciśnienie":
+                unit.setText("mmHg");
+                break;
+            case "Cukier":
+                unit.setText("mg/dl");
+                break;
+            case "Waga":
+                unit.setText("kg");
+                break;
+            case "Temperatura":
+                unit.setText("stopnie Celsjusza");
+                break;
+            case "Puls":
+                unit.setText("uderzenia/min");
+                break;
+
+        }
+
+    }
 
 
     private void populateListView() {
