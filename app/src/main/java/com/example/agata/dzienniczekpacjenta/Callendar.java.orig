@@ -50,13 +50,15 @@ public class Callendar extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Callendar.this, VisitDetails.class);
                 intent.putExtra("selectedDate",date);
-intent.putExtra("hourOfVisit", hour);
- intent.putExtra("ID", id);
-
+<<<<<<< Updated upstream
+                intent.putExtra("ID", id);
+=======
+                intent.putExtra("hourOfVisit", hour);
                 intent.putExtra("doctor", doctor);
                 intent.putExtra("place", place);
                 intent.putExtra("info", info);
                 intent.putExtra("editMode", "no");
+>>>>>>> Stashed changes
                 startActivity(intent);
 
             }

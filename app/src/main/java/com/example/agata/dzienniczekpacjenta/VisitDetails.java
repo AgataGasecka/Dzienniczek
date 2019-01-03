@@ -19,8 +19,8 @@ public class VisitDetails extends AppCompatActivity {
     String visitHour;
     String doctor;
     String place;
-    String information;
-
+    String info;
+    String editMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +28,31 @@ public class VisitDetails extends AppCompatActivity {
         id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_visit_details);
         helper = new DatabaseHelper(this);
+        editMode = getIntent().getStringExtra("editMode");
+        Button addVisit = findViewById(R.id.saveVisitToDb);
+        Button updateVisit = findViewById(R.id.button14);
+        Button deleteVisit = findViewById(R.id.button15);
+        if (editMode.equals("no")) {
+
+            addVisit.setVisibility(View.VISIBLE);
+            updateVisit.setVisibility(View.GONE);
+            deleteVisit.setVisibility(View.GONE);
+        }
+        else if(editMode.equals("yes")){
+            addVisit.setVisibility(View.GONE);
+            updateVisit.setVisibility(View.VISIBLE);
+            deleteVisit.setVisibility(View.VISIBLE);
+        }
         TextView selectedD = findViewById(R.id.selectedDate);
         selectedD.setText(getIntent().getStringExtra("selectedDate"));
+        TextView visitHour1 = findViewById(R.id.selectedHour);
+        visitHour1.setText(getIntent().getStringExtra("hourOfVisit"));
+        TextView doctor1 = findViewById(R.id.doctorsName);
+        doctor1.setText(getIntent().getStringExtra("doctor"));
+        TextView place1 = findViewById(R.id.placesName);
+        place1.setText(getIntent().getStringExtra("place"));
+        TextView info1 = findViewById(R.id.informationContent);
+        info1.setText(getIntent().getStringExtra("info"));
         Button setVisitTime = findViewById(R.id.setHour);
         setVisitTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,14 +81,46 @@ public class VisitDetails extends AppCompatActivity {
             visitHour = ((TextView)findViewById(R.id.selectedHour)).getText().toString().trim();
             doctor = ((EditText)findViewById(R.id.doctorsName)).getText().toString().trim();
             place = ((EditText)findViewById(R.id.placesName)).getText().toString().trim();
-            information = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
+            info = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
 
-            helper.insertNewVisit(visitDate, visitHour, doctor, place, information );
+            helper.insertNewVisit(visitDate, visitHour, doctor, place, info );
 
                 Intent intent = new Intent(VisitDetails.this, Callendar.class);
                 intent.putExtra("ID", id);
                 startActivity(intent);
             }
         });
+
+        Button updateVisit1 = findViewById(R.id.button14);
+
+        updateVisit1.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                visitDate = ((TextView)findViewById(R.id.selectedDate)).getText().toString().trim();
+                visitHour = ((TextView)findViewById(R.id.selectedHour)).getText().toString().trim();
+                doctor = ((EditText)findViewById(R.id.doctorsName)).getText().toString().trim();
+                place = ((EditText)findViewById(R.id.placesName)).getText().toString().trim();
+                info = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
+
+                helper.updateVisit(visitDate, visitHour, doctor, place, info );
+
+            }
+        });
+        Button deleteVisit1 = findViewById(R.id.button15);
+        deleteVisit1.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                visitDate = ((TextView)findViewById(R.id.selectedDate)).getText().toString().trim();
+                visitHour = ((TextView)findViewById(R.id.selectedHour)).getText().toString().trim();
+                doctor = ((EditText)findViewById(R.id.doctorsName)).getText().toString().trim();
+                place = ((EditText)findViewById(R.id.placesName)).getText().toString().trim();
+                info = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
+
+                helper.deleteVisit(visitDate, visitHour, doctor, place, info );
+            }
+        });
+
     }
 }
