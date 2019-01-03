@@ -24,12 +24,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String Table_Column_2_measurement="MEASUREMENT";
 
-public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
-   public static final String Visits_Date = "DATE";
+<<<<<<< Updated upstream
+    public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
+=======
+    public static final String Visits_Date = "DATE";
     public static final String Visits_Hour = "HOUR";
     public static final String Visits_Doctor = "DOCTOR";
     public static final String Visits_Place = "PLACE";
     public static final String Visits_Info = "INFO";
+>>>>>>> Stashed changes
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -221,7 +224,7 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         Cursor cursor=db.rawQuery(query, new String[]{measurement_type});
         return cursor;
     }
-    
+
     public Cursor viewListOfVisits() {
         Cursor cursor = null;
         SQLiteDatabase db = this.getReadableDatabase();
