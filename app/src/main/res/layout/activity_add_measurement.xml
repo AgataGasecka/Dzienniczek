@@ -12,7 +12,7 @@
         android:layout_width="109dp"
         android:layout_height="63dp"
         android:layout_marginStart="51dp"
-        android:layout_marginEnd="53dp"
+        android:layout_marginEnd="55dp"
         android:text="Wyświetl pomiary"
         app:layout_constraintBaseline_toBaselineOf="@+id/dodajpomiar"
         app:layout_constraintEnd_toEndOf="parent"

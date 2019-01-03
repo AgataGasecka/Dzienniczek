@@ -32,7 +32,7 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_measurement_data);
         mListView = findViewById(R.id.listView);
         Spinner parameters = (Spinner) findViewById(R.id.wyborRodzajuPomiaru);
-        Button wykres= (Button) findViewById(R.id.button12);
+        Button wykres= (Button) findViewById(R.id.wykres);
 
         populateListView();
 
