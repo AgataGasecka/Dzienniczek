@@ -139,7 +139,7 @@
 
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/wykres"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
