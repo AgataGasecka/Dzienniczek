@@ -4,7 +4,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,15 +20,35 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
     ListAdapter listAdapter;
     ListView mListView;
     List<Pomiar> wynikiPomiarow;
+    public String measurement_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_measurement_data);
         mListView = findViewById(R.id.listView);
+        Spinner parameters = (Spinner) findViewById(R.id.wyborRodzajuPomiaru);
 
         populateListView();
+
+
+        parameters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ListMeasurementDataActivity.this, "Wybrano opcję" + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+                measurement_type=parent.getItemAtPosition(position).toString();
+                populateFilterListView();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
+
+
+
 
     private void populateListView() {
         mDatabaseHelper = new DatabaseHelper(this);
@@ -46,6 +69,27 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
         listAdapter = new ListAdapter(wynikiPomiarow, getApplicationContext());
         mListView.setAdapter(listAdapter);
     }
+
+    private void populateFilterListView() {
+        mDatabaseHelper = new DatabaseHelper(this);
+        db = mDatabaseHelper.getWritableDatabase();
+
+        wynikiPomiarow = new ArrayList<>();
+
+        Cursor cursor = mDatabaseHelper.viewFilterMeasurementData(measurement_type);
+        while (cursor.moveToNext()) {
+            String data = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Table_Column_data));
+            String godzina = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Table_Column_1_hour));
+            String pomiar = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Table_Column_2_measurement));
+
+            wynikiPomiarow.add(new Pomiar(data, godzina, pomiar));
+        }
+        cursor.close();
+
+        listAdapter = new ListAdapter(wynikiPomiarow, getApplicationContext());
+        mListView.setAdapter(listAdapter);
+    }
+
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
