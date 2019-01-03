@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Settings extends AppCompatActivity {
-
+    int id;
     DatabaseHelper helper;
     String patientName;
     String patientSurname;
@@ -34,6 +34,7 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_settings);
         helper = new DatabaseHelper(this);
     }
@@ -134,6 +135,7 @@ public class Settings extends AppCompatActivity {
 
     public void goToHomePage(View view){
         Intent intent = new Intent(this, Settings2.class);
+        intent.putExtra("ID", id);
         startActivity(intent);
     }
 }

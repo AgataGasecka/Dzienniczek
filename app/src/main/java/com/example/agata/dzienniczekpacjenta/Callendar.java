@@ -16,6 +16,7 @@ import java.util.Date;
 
 public class Callendar extends AppCompatActivity {
 
+     int id;
      Date dateInCalendar = Calendar.getInstance().getTime();
      SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
      String date = df.format(dateInCalendar);
@@ -25,6 +26,7 @@ public class Callendar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_callendar);
 
         Spinner spinner = findViewById(R.id.spinner);
@@ -50,6 +52,7 @@ public class Callendar extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Callendar.this, VisitDetails.class);
                 intent.putExtra("selectedDate",date);
+                intent.putExtra("ID", id);
                 startActivity(intent);
 
             }

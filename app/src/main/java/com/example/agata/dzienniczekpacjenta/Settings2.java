@@ -9,10 +9,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 public class Settings2 extends AppCompatActivity {
-
+    int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_settings2);
 
         Spinner spinnerPatameter = findViewById(R.id.spinner2);

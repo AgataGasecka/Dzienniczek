@@ -24,6 +24,7 @@ import java.util.Calendar;
 
 public class AddMeasurement extends AppCompatActivity {
 
+    int id;
     DatabaseHelper controllerdb = new DatabaseHelper(this);
     SQLiteDatabase db;
     public String measurement_type;
@@ -39,6 +40,7 @@ public class AddMeasurement extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        id = getIntent().getIntExtra("ID", 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_measurement);
         //lv = (ListView) findViewById(R.id.listview);
@@ -96,6 +98,7 @@ public class AddMeasurement extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ListMeasurementDataActivity.class);
+                intent.putExtra("ID", id);
                 startActivity(intent);
             }
         });
