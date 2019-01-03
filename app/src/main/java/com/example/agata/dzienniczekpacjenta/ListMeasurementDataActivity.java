@@ -1,11 +1,13 @@
 package com.example.agata.dzienniczekpacjenta;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,10 +32,18 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_measurement_data);
         mListView = findViewById(R.id.listView);
         Spinner parameters = (Spinner) findViewById(R.id.wyborRodzajuPomiaru);
+        Button wykres= (Button) findViewById(R.id.button12);
 
         populateListView();
 
-
+        wykres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), VisualizationActivity.class);
+                intent.putExtra("ID", id);
+                startActivity(intent);
+            }
+        });
         parameters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -118,4 +128,6 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
+
+
 }
