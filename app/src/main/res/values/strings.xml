@@ -40,7 +40,7 @@
     <string-array name="parameters_array">
         <item>Ciśnienie</item>
         <item>Cukier</item>
-        <item>Masa ciała</item>
+        <item>Waga</item>
         <item>Temperatura</item>
         <item>Puls</item>
     </string-array>
@@ -50,12 +50,6 @@
         <item>3 dni przed</item>
         <item>Tydzień przed</item>
     </string-array>
-    <string-array name="spinner_parameters">
-        <item>Ciśnienie</item>
-        <item>Temperatura</item>
-        <item>Cukier</item>
-        <item>Masa ciała</item>
-        <item>Puls</item>
-    </string-array>
+
 
 </resources>

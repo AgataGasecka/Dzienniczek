@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 
-    public static final String DATABASE_NAME = "dzienniczek.db";
+    public static final String DATABASE_NAME = "dzienniczek1.db";
     public static final String USERS_TABLE = "users";
     public static final String PATIENT_TABLE = "patient";
     public static final String VISITS_TABLE = "visits";
@@ -17,11 +17,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private String USUWANIE_DO_TESTOW = "DELETE FROM USERS";
     private static final String TAG = "DatabaseHelper";
 
+
     public static final String Table_Column_data="DATE";
 
     public static final String Table_Column_1_hour="HOUR";
 
     public static final String Table_Column_2_measurement="MEASUREMENT";
+
+    public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -60,7 +63,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "USER_ID INTEGER, " +
                 "DATE TEXT, " +
                 " HOUR TEXT," +
-                "MEASUREMENT TEXT)";
+                "MEASUREMENT TEXT," +
+                "MEASUREMENT_TYPE TEXT)";
         db.execSQL(measuremetsQuery);
 
         String settingsQuery = "create table " + SETTINGS_TABLE +
@@ -69,6 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "PARAMETERNAME TEXT, " +
                 "DEFAULTVALUE TEXT)";
         db.execSQL(settingsQuery);
+
+
     }
 
     @Override
@@ -94,13 +100,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void insertNewVisit(String visitDate, String visitHour, String doctor, String place, String information) {
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("DATE", visitDate);
-                contentValues.put("HOUR", visitHour);
-                contentValues.put("DOCTOR", doctor);
-                contentValues.put("PLACE", place);
-                contentValues.put("INFORMATION", information);
-                db.insert(VISITS_TABLE, null, contentValues);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("DATE", visitDate);
+            contentValues.put("HOUR", visitHour);
+            contentValues.put("DOCTOR", doctor);
+            contentValues.put("PLACE", place);
+            contentValues.put("INFORMATION", information);
+            db.insert(VISITS_TABLE, null, contentValues);
 
         }
     }
@@ -142,13 +148,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     }
 
-    public boolean addMeasurementData(String userid, String date, String hour, String measurement){
+    public boolean addMeasurementData(String userid, String date, String hour, String measurement, String measurement_type){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("USER_ID", userid);
         contentValues.put("DATE", date);
         contentValues.put("HOUR", hour);
         contentValues.put("MEASUREMENT", measurement);
+        contentValues.put("MEASUREMENT_TYPE", measurement_type);
 
         Log.d(TAG, "addData: Adding data to " + MEASUREMETS_TABLE);
 
@@ -164,8 +171,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public Cursor viewMeasurementData() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query= "Select * from " + MEASUREMETS_TABLE;
-        Cursor cursor=db.rawQuery(query, null);
+        AddMeasurement addMeasurement = new AddMeasurement();
+        //    String query= "SELECT * FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
+        //  Cursor cursor=db.rawQuery(query, new String[]{"Ciśnienie"});
+        String query= "SELECT * FROM " + MEASUREMETS_TABLE ;
+        Cursor cursor=db.rawQuery(query,null);
+        return cursor;
+    }
+
+
+    public Cursor viewFilterMeasurementData(String measurement_type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ListMeasurementDataActivity list = new ListMeasurementDataActivity();
+        String query= "SELECT * FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
+        Cursor cursor=db.rawQuery(query, new String[]{measurement_type});
         return cursor;
     }
 }
