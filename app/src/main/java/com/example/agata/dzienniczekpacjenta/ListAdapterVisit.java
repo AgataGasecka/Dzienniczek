@@ -51,6 +51,7 @@ public class ListAdapterVisit extends BaseAdapter {
         final String hourOfVisit = visits.get(position).getHour();
         final String doctor = visits.get(position).getDoctor();
         final String place = visits.get(position).getPlace();
+        final int id = visits.get(position).getID();
         date.setText(dateOfVisit);
         hour.setText(hourOfVisit);
 
@@ -64,6 +65,7 @@ public class ListAdapterVisit extends BaseAdapter {
                 intent.putExtra( "hourOfVisit", hourOfVisit);
                 intent.putExtra("doctor", doctor);
                 intent.putExtra("place", place);
+                intent.putExtra("visitId", id);
                 intent.putExtra("info", "brak");
                 intent.putExtra("editMode", "yes");
 

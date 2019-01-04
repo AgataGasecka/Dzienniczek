@@ -14,6 +14,7 @@ import java.util.Calendar;
 
 public class VisitDetails extends AppCompatActivity {
     int id;
+    int visitId;
     DatabaseHelper helper;
     String visitDate;
     String visitHour;
@@ -26,6 +27,7 @@ public class VisitDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         id = getIntent().getIntExtra("ID", 0);
+        visitId = getIntent().getIntExtra("visitId", 0);
         setContentView(R.layout.activity_visit_details);
         helper = new DatabaseHelper(this);
         editMode = getIntent().getStringExtra("editMode");
@@ -83,7 +85,7 @@ public class VisitDetails extends AppCompatActivity {
             place = ((EditText)findViewById(R.id.placesName)).getText().toString().trim();
             info = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
 
-            helper.insertNewVisit(visitDate, visitHour, doctor, place, info );
+            helper.insertNewVisit(visitDate, visitHour, doctor, place, info, id);
 
                 Intent intent = new Intent(VisitDetails.this, Callendar.class);
                 intent.putExtra("ID", id);
@@ -103,7 +105,10 @@ public class VisitDetails extends AppCompatActivity {
                 place = ((EditText)findViewById(R.id.placesName)).getText().toString().trim();
                 info = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
 
-                helper.updateVisit(visitDate, visitHour, doctor, place, info );
+                helper.updateVisit(visitDate, visitHour, doctor, place, info, visitId);
+                Intent intent = new Intent(VisitDetails.this, ListOfVisits.class);
+                intent.putExtra("ID", id);
+                startActivity(intent);
 
             }
         });
@@ -118,7 +123,10 @@ public class VisitDetails extends AppCompatActivity {
                 place = ((EditText)findViewById(R.id.placesName)).getText().toString().trim();
                 info = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
 
-                helper.deleteVisit(visitDate, visitHour, doctor, place, info );
+                helper.deleteVisit(visitDate, visitHour, doctor, place, info, visitId);
+                Intent intent = new Intent(VisitDetails.this, ListOfVisits.class);
+                intent.putExtra("ID", id);
+                startActivity(intent);
             }
         });
 

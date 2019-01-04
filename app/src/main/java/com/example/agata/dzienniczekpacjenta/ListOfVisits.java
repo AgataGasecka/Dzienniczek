@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class ListOfVisits extends AppCompatActivity {
-
+    int id;
     DatabaseHelper mDatabaseHelper;
     SQLiteDatabase db;
     ListAdapterVisit listAdapter;
@@ -21,6 +21,7 @@ public class ListOfVisits extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_list_of_visits);
         mListView = findViewById(R.id.visitsList);
         showVisitsList();
@@ -32,16 +33,17 @@ public class ListOfVisits extends AppCompatActivity {
 
         addedVisits = new ArrayList<>();
 
-        Cursor cursor = mDatabaseHelper.viewListOfVisits();
+        Cursor cursor = mDatabaseHelper.viewListOfVisits(id);
         while (cursor.moveToNext()) {
             String date = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Visits_Date));
             String hour = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Visits_Hour));
             String doctor = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Visits_Doctor));
             String place = cursor.getString((cursor.getColumnIndex(mDatabaseHelper.Visits_Place)));
+            int visitId = cursor.getInt((cursor.getColumnIndex("ID")));
             String info = "brak";
             //info = cursor.getString((cursor.getColumnIndex(mDatabaseHelper.Visits_Info)));
 
-            addedVisits.add(new Visit(date, hour, doctor, place, info));
+            addedVisits.add(new Visit(date, hour, doctor, place, info, visitId));
             //Visit allInformationOfVisit = new Visit(date, hour, doctor, place, info);
         }
         cursor.close();
