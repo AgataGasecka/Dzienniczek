@@ -12,9 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Settings2 extends AppCompatActivity {
+
+    DatabaseHelper helper;
     int id;
     String measurement_type;
-    String measurement_standard;
+    String measurement_standard = "";
+    String remindAboutVisit;
+    String remindAboutMedicines;
+    String remindAboutMeasurement;
     EditText newNorm;
 
     @Override
@@ -22,8 +27,9 @@ public class Settings2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_settings2);
-
+        helper = new DatabaseHelper(this);
         newNorm = findViewById(R.id.editText7);
+
         Spinner spinnerPatameter = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.parameters_array, android.R.layout.simple_spinner_item);
@@ -34,7 +40,7 @@ public class Settings2 extends AppCompatActivity {
         spinnerPatameter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(Settings2.this, "Wybrano opcję" + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Settings2.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
                 measurement_type=parent.getItemAtPosition(position).toString();
                 setMeasurementStandard();
             }
@@ -95,31 +101,102 @@ public class Settings2 extends AppCompatActivity {
     public void setReminderAboutVisits(View view){
         CheckBox remindAboutVisitCheckbox = findViewById(R.id.checkBox);
         Spinner whenToRemindAboutVisit = findViewById(R.id.spinner3);
-        if(remindAboutVisitCheckbox.isChecked())
+
+        if(remindAboutVisitCheckbox.isChecked()) {
             whenToRemindAboutVisit.setVisibility(View.VISIBLE);
-        else if(!remindAboutVisitCheckbox.isChecked())
-            whenToRemindAboutVisit.setVisibility(view.GONE);
+            whenToRemindAboutVisit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(Settings2.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+                    remindAboutVisit=parent.getItemAtPosition(position).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
+        else if(!remindAboutVisitCheckbox.isChecked()) {
+            whenToRemindAboutVisit.setVisibility(view.INVISIBLE);
+            remindAboutVisit="";
+        }
     }
 
     public void setReminderAboutMedicines(View view){
         CheckBox remindAboutMedicinesCheckbox = findViewById(R.id.checkBox2);
         Spinner whenToRemindAboutMedicines = findViewById(R.id.spinner4);
-        if(remindAboutMedicinesCheckbox.isChecked())
+
+        if(remindAboutMedicinesCheckbox.isChecked()) {
             whenToRemindAboutMedicines.setVisibility(View.VISIBLE);
-        else if(!remindAboutMedicinesCheckbox.isChecked())
-            whenToRemindAboutMedicines.setVisibility(View.GONE);
+            whenToRemindAboutMedicines.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(Settings2.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+                    remindAboutMedicines=parent.getItemAtPosition(position).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
+        else if(!remindAboutMedicinesCheckbox.isChecked()) {
+            whenToRemindAboutMedicines.setVisibility(View.INVISIBLE);
+            remindAboutMedicines="";
+        }
     }
     public void setReminderAboutMeasurement(View view){
         CheckBox remindAboutMeasurementCheckbox = findViewById(R.id.checkBox3);
         Spinner whenToRemindAboutMeasurement = findViewById(R.id.spinner5);
-        if(remindAboutMeasurementCheckbox.isChecked())
+
+        if(remindAboutMeasurementCheckbox.isChecked()) {
             whenToRemindAboutMeasurement.setVisibility(View.VISIBLE);
-        else if(!remindAboutMeasurementCheckbox.isChecked())
-            whenToRemindAboutMeasurement.setVisibility(View.GONE);
+            whenToRemindAboutMeasurement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(Settings2.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+                    remindAboutMeasurement=parent.getItemAtPosition(position).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
+        else if(!remindAboutMeasurementCheckbox.isChecked()) {
+            whenToRemindAboutMeasurement.setVisibility(View.INVISIBLE);
+            remindAboutMeasurement="";
+        }
     }
 
-    private void getInfo(){
-        measurement_standard = newNorm.getText().toString();
+    public void saveInfo(View view){
+        boolean correctly = false;
+
+        if(newNorm.isEnabled() && !(newNorm.getText().toString() == ""))
+            measurement_standard = newNorm.getText().toString();
+
+        if(measurement_type.equals("Waga") && measurement_standard == "" ) {
+            Toast.makeText(Settings2.this, "Nie podano normy wagi!", Toast.LENGTH_SHORT).show();
+        }
+        else if(measurement_standard == ""){
+            Toast.makeText(Settings2.this, "Nie podano normy!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            correctly = helper.insertUserSettings(id, measurement_type, measurement_standard);
+        }
+
+        if(correctly){
+            Toast.makeText(Settings2.this, "Zapisano w bazie", Toast.LENGTH_SHORT).show();
+            newNorm.setText("");
+            newNorm.setVisibility(View.INVISIBLE);
+            measurement_standard = "";
+        }
+        else{
+            Toast.makeText(Settings2.this, "Błąd", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

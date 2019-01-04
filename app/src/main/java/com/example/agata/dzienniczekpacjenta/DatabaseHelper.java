@@ -199,6 +199,25 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         }
     }
 
+    public boolean insertUserSettings(int userId, String parametrName, String parametrStandard) {
+
+        long result;
+
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("USER_ID", userId);
+            contentValues.put("PARAMETERNAME", parametrName);
+            contentValues.put("DEFAULTVALUE", parametrStandard);
+            result = db.insert(SETTINGS_TABLE, null, contentValues);
+        }
+
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public Cursor viewMeasurementData() {
         SQLiteDatabase db = this.getReadableDatabase();
         AddMeasurement addMeasurement = new AddMeasurement();
