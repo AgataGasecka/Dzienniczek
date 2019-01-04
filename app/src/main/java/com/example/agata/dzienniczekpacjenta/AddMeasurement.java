@@ -85,9 +85,10 @@ public class AddMeasurement extends AppCompatActivity {
                 String wynik = wynikPomiaru.getText().toString();
                 if (data.length() !=0 & godzina.length() !=0 & wynik.length() !=0){
                     AddData(userid,data,godzina,wynik,measurement_type);
-                    dataPomiaru.setText("");
-                    godzinaPomiaru.setText("");
+                    dataPomiaru.setText("Ustaw datę");
+                    godzinaPomiaru.setText("Ustaw godzinę");
                     wynikPomiaru.setText("");
+                    wynikPomiaru.setHint("Podaj wynik pomiaru");
                 } else {
                     toastMessage("Nie umieściłeś danych w polach!");
                 }
