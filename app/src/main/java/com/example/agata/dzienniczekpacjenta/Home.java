@@ -41,6 +41,9 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
+    public void goToAddDrugs(View view){
+        Intent intent = new Intent(this, AddDrug.class);
+        intent.putExtra("ID", id);
+        startActivity(intent);
+    }
 }
