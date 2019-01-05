@@ -80,13 +80,31 @@
                 android:value=".Home" />
         </activity>
         <activity
+            android:name=".AddDrug"
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home" />
+        </activity>
+        <activity
             android:name=".ListMeasurementDataActivity"
             android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".ListOfVisits" />
+        <activity android:name=".ListOfDrugs"
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home"/>
+        </activity>
+        <activity android:name=".ListOfVisits"
+            android:parentActivityName=".Callendar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Callendar"/>
+        </activity>
         <activity android:name=".VisualizationActivity" />
     </application>
 

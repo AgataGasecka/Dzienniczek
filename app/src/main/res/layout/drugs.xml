@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <TextView
+        android:id="@+id/textViewDataDrugs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/parameterDawka"
+        android:textAlignment="center"
+        android:textColor="#050505"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewGodzinaDrugs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textColor="#050505"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewPomiarDrugs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textColor="#050505"
+        android:textSize="18sp" />
+</LinearLayout>

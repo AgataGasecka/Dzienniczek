@@ -18,18 +18,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String VISITS_TABLE = "visits";
     public static final String MEASUREMETS_TABLE = "measurements";
     public static final String SETTINGS_TABLE = "settings";
+    public static final String DRUGS_TABLE = "drugs";
     private String USUWANIE_DO_TESTOW = "DELETE FROM USERS";
     private static final String TAG = "DatabaseHelper";
 
 
     public static final String Table_Column_data = "DATE";
-
     public static final String Table_Column_1_hour = "HOUR";
-
     public static final String Table_Column_2_measurement = "MEASUREMENT";
-
     public static final String Table_Column_3_measurement_type = "MEASUREMENT_TYPE";
     public static final String Table_Column_parameter_name = "PARAMETERNAME";
+
+    //DRUGS
+    public static final String ColumnData="DATE";
+    public static final String ColumnHour="HOUR";
+    public static final String ColumnDrugDose="DRUG"; //DOSE OF DRUG
+    public static final String ColumnDrugType="DRUG_TYPE";
 
     public static final String Visits_Date = "DATE";
     public static final String Visits_Hour = "HOUR";
@@ -79,6 +83,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "PARAMETERNAME TEXT, " +
                 "DEFAULTVALUE TEXT)";
         db.execSQL(settingsQuery);
+
+        String drugsQuery = "create table " + DRUGS_TABLE +
+                "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "USER_ID INTEGER, " +
+                "DATE TEXT, " +
+                " HOUR TEXT," +
+                "DRUGS TEXT," +
+                "DRUGS_TYPE TEXT)";
+        db.execSQL(drugsQuery);
     }
 
     @Override
@@ -278,5 +291,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return result;
+    }
+
+    public boolean addDrugsData(String userid, String date, String hour, String drugs, String drugs_type){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("USER_ID", userid);
+        contentValues.put("DATE", date);
+        contentValues.put("HOUR", hour);
+        contentValues.put("DRUGS", drugs);
+        contentValues.put("DRUGS_TYPE", drugs_type);
+
+        Log.d(TAG, "addData: Adding data to " + DRUGS_TABLE);
+
+        long result = db.insert(DRUGS_TABLE, null, contentValues);
+
+        //if date as inserted incorrectly it will return -1
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Cursor viewDrugData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        AddDrug addMeasurement = new AddDrug();
+        //    String query= "SELECT * FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
+        //  Cursor cursor=db.rawQuery(query, new String[]{"Ciśnienie"});
+        String query= "SELECT * FROM " + DRUGS_TABLE ;
+        Cursor cursor=db.rawQuery(query,null);
+        return cursor;
+    }
+
+
+    public Cursor viewFilterDrugsData(String drugs_type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        //zmienic na drug
+        ListMeasurementDataActivity list = new ListMeasurementDataActivity();
+        String query= "SELECT * FROM " + DRUGS_TABLE + " WHERE " + ColumnDrugType + "=?";
+        Cursor cursor=db.rawQuery(query, new String[]{drugs_type});
+        return cursor;
     }
 }

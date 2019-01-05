@@ -69,12 +69,12 @@ public class VisualizationActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-                    String query =  "SELECT " + Table_Column_data +"," + Table_Column_1_hour+ "," + Table_Column_2_measurement + "," + Table_Column_3_measurement_type+ " FROM " + MEASUREMETS_TABLE;
-                    c = db.rawQuery(query, null);
+                    String query =  "SELECT " + Table_Column_data +"," + Table_Column_1_hour+ "," + Table_Column_2_measurement + "," + Table_Column_3_measurement_type+ " FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?  ";//AND USER_ID=" + id;
+                    c = db.rawQuery(query,  new String[]{measurement_type});
                     int rowcount = 0;
                     int colcount = 0;
                     File sdCardDir = Environment.getExternalStorageDirectory();
-                    String filename = "MyBackUp.csv";
+                    String filename = "wyniki_z_dzienniczka_pacjenta.csv";
                     // the name of the file to export with
                     File saveFile = new File(sdCardDir, filename);
                     FileWriter fw = new FileWriter(saveFile);
@@ -110,7 +110,7 @@ public class VisualizationActivity extends AppCompatActivity {
                             bw.newLine();
                         }
                         bw.flush();
-                        Toast.makeText(VisualizationActivity.this, "Exported succes", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VisualizationActivity.this, "Wyniki zostały wyeksportowane!", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception ex) {
                     if (db.isOpen()) {
@@ -142,9 +142,9 @@ public class VisualizationActivity extends AppCompatActivity {
 //zrobic zeby maxCapasity to byla wartosc pobierana z bazy defaultvalue w zaleznosci
         //od id i od parametru measurement_type
         int maxCapacity=120;
-       // String norm=mDatabaseHelper.viewParameterNorm(measurement_type, id);
-       // float maxNorm=Float.valueOf(norm);
-         LimitLine ll = new LimitLine(maxCapacity, "Norma");
+        // String norm=mDatabaseHelper.viewParameterNorm(measurement_type, id);
+        // float maxNorm=Float.valueOf(norm);
+        LimitLine ll = new LimitLine(maxCapacity, "Norma");
 
         ll.setTextSize(4f);
         ll.setLineColor(Color.RED);
@@ -175,5 +175,6 @@ public class VisualizationActivity extends AppCompatActivity {
 
 
     }
+
 
 }

@@ -33,7 +33,9 @@
     <string name="parameterWynik">Wynik</string>
     <string name="plannedVisits"><u>Zaplanowane wiyzyty</u></string>
     <string name="parameterDawka">Dawka</string>
-    <string name="goToAddDrug">Dawkowanie</string>
+    <string name="goToAddDrug">Dodaj lek</string>
+    <string name="listOfDrags">Lista leków</string>
+    <string name="listOfMeasurment">Wyświetl pomiary</string>
 
     <string-array name="calendar_array">
         <item>Dzień</item>
