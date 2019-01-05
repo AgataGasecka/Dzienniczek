@@ -10,7 +10,7 @@ import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 
-public class DatabaseHelper extends SQLiteOpenHelper{
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "dzienniczek1.db";
     public static final String USERS_TABLE = "users";
@@ -22,14 +22,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TAG = "DatabaseHelper";
 
 
-    public static final String Table_Column_data="DATE";
+    public static final String Table_Column_data = "DATE";
 
-    public static final String Table_Column_1_hour="HOUR";
+    public static final String Table_Column_1_hour = "HOUR";
 
-    public static final String Table_Column_2_measurement="MEASUREMENT";
+    public static final String Table_Column_2_measurement = "MEASUREMENT";
 
-public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
-   public static final String Visits_Date = "DATE";
+    public static final String Table_Column_3_measurement_type = "MEASUREMENT_TYPE";
+    public static final String Table_Column_parameter_name = "PARAMETERNAME";
+
+    public static final String Visits_Date = "DATE";
     public static final String Visits_Hour = "HOUR";
     public static final String Visits_Doctor = "DOCTOR";
     public static final String Visits_Place = "PLACE";
@@ -41,7 +43,7 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String usersQuery  = "create table " + USERS_TABLE +
+        String usersQuery = "create table " + USERS_TABLE +
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "EMAIL TEXT, " +
                 "PASSWORD TEXT, " +
@@ -52,7 +54,7 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
                 "SEX BOOLEAN)";
         db.execSQL(usersQuery);
 
-        String visitsQuery  = "create table " + VISITS_TABLE +
+        String visitsQuery = "create table " + VISITS_TABLE +
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "USER_ID INTEGER, " +
                 "DATE TEXT, " +
@@ -88,7 +90,7 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         String Query = "Select * from " + USERS_TABLE + " where EMAIL=" + email;
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
-            if(!ifDataExists(db, USERS_TABLE, "EMAIL", email)) {
+            if (!ifDataExists(db, USERS_TABLE, "EMAIL", email)) {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("EMAIL", email);
                 contentValues.put("PASSWORD", password);
@@ -124,7 +126,7 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
             contentValues.put("DOCTOR", doctor);
             contentValues.put("PLACE", place);
             contentValues.put("INFORMATION", information);
-            db.update(VISITS_TABLE, contentValues,"USER_ID="+userId, null);
+            db.update(VISITS_TABLE, contentValues, "USER_ID=" + userId, null);
 
         }
     }
@@ -140,7 +142,7 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
     public boolean updateUser(String patientName, String patientSurname, String patientBirthday, String patientPesel, Boolean patientSex, int userId) {
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
-            if(!ifDataExists(db, USERS_TABLE, "ID", String.valueOf(userId))) {
+            if (!ifDataExists(db, USERS_TABLE, "ID", String.valueOf(userId))) {
 
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("NAME", patientName);
@@ -148,32 +150,31 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
                 contentValues.put("BIRTHDAY", patientBirthday);
                 contentValues.put("PESEL", patientPesel);
                 contentValues.put("SEX", patientSex);
-                db.update(USERS_TABLE, contentValues,"ID=" + userId, null);
+                db.update(USERS_TABLE, contentValues, "ID=" + userId, null);
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
     }
 
-    public boolean ifDataExists(SQLiteDatabase db, String TableName, String dbField, String dbValue){
+    public boolean ifDataExists(SQLiteDatabase db, String TableName, String dbField, String dbValue) {
         db.execSQL(USUWANIE_DO_TESTOW);
         Cursor cursor = null;
-        String sql ="SELECT * FROM "+TableName+" WHERE "+ dbField + "=\"" + dbValue + "\"";
-        cursor= db.rawQuery(sql,null);
+        String sql = "SELECT * FROM " + TableName + " WHERE " + dbField + "=\"" + dbValue + "\"";
+        cursor = db.rawQuery(sql, null);
 
-        if(cursor.getCount()>0){
+        if (cursor.getCount() > 0) {
             cursor.close();
             return true;
-        }else{
+        } else {
             cursor.close();
             return false;
         }
 
     }
 
-    public boolean addMeasurementData(String userid, String date, String hour, String measurement, String measurement_type){
+    public boolean addMeasurementData(String userid, String date, String hour, String measurement, String measurement_type) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("USER_ID", userid);
@@ -199,8 +200,8 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         AddMeasurement addMeasurement = new AddMeasurement();
         //    String query= "SELECT * FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
         //  Cursor cursor=db.rawQuery(query, new String[]{"Ciśnienie"});
-        String query= "SELECT * FROM " + MEASUREMETS_TABLE ;
-        Cursor cursor=db.rawQuery(query,null);
+        String query = "SELECT * FROM " + MEASUREMETS_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
         return cursor;
     }
 
@@ -208,24 +209,25 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
     public Cursor viewFilterMeasurementData(String measurement_type) {
         SQLiteDatabase db = this.getReadableDatabase();
         ListMeasurementDataActivity list = new ListMeasurementDataActivity();
-        String query= "SELECT * FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
-        Cursor cursor=db.rawQuery(query, new String[]{measurement_type});
-        return cursor;
-    }
-    
-    public Cursor viewListOfVisits(int userId) {
-        Cursor cursor = null;
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query= "Select * from " + VISITS_TABLE + " where USER_ID=" + userId;
-        cursor=db.rawQuery(query, null);
+        String query = "SELECT * FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
+        Cursor cursor = db.rawQuery(query, new String[]{measurement_type});
         return cursor;
     }
 
-    public ArrayList<String> queryXData(){
+    public Cursor viewListOfVisits(int userId) {
+        Cursor cursor = null;
         SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from " + VISITS_TABLE + " where USER_ID=" + userId;
+        cursor = db.rawQuery(query, null);
+        return cursor;
+    }
+
+    public ArrayList<String> queryXData(String measurement_type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ListMeasurementDataActivity list = new ListMeasurementDataActivity();
         ArrayList<String> xNewData = new ArrayList<String>();
-        String query = "SELECT " + Table_Column_data + " FROM " + MEASUREMETS_TABLE;
-        Cursor cursor = db.rawQuery(query, null);
+        String query = "SELECT " + Table_Column_data + " FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
+        Cursor cursor = db.rawQuery(query, new String[]{measurement_type});
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             xNewData.add(cursor.getString(cursor.getColumnIndex(Table_Column_data)));
         }
@@ -233,15 +235,29 @@ public static final String Table_Column_3_measurement_type="MEASUREMENT_TYPE";
         return xNewData;
     }
 
-    public ArrayList<Integer> queryYData(){
+    public ArrayList<Integer> queryYData(String measurement_type) {
         ArrayList<Integer> yNewData = new ArrayList<Integer>();
+        ListMeasurementDataActivity list = new ListMeasurementDataActivity();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT " + Table_Column_2_measurement + " FROM " + MEASUREMETS_TABLE;
-        Cursor cursor = db.rawQuery(query, null);
+        String query = "SELECT " + Table_Column_2_measurement + " FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
+        Cursor cursor = db.rawQuery(query, new String[]{measurement_type});
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             yNewData.add(cursor.getInt(cursor.getColumnIndex(Table_Column_2_measurement)));
         }
         cursor.close();
         return yNewData;
+    }
+
+    public String viewParameterNorm(String measurement_type, int userId) {
+        Cursor cursor = null;
+        String result = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select DEFAULTVALUE from " + SETTINGS_TABLE + " WHERE " + Table_Column_parameter_name + "=? AND USER_ID=" + userId;
+        cursor = db.rawQuery(query, new String[]{measurement_type});
+        if(cursor.moveToFirst()){
+            result = cursor.getString(cursor.getColumnIndex("DEFAULTVALUE"));
+        }
+        cursor.close();
+        return result;
     }
 }

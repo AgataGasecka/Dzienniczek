@@ -42,13 +42,14 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), VisualizationActivity.class);
                 intent.putExtra("ID", id);
+                intent.putExtra("MEASUREMENT_TYPE", measurement_type);
                 startActivity(intent);
             }
         });
         parameters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ListMeasurementDataActivity.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(ListMeasurementDataActivity.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
                 measurement_type=parent.getItemAtPosition(position).toString();
                 setUnit();
                 populateFilterListView();
