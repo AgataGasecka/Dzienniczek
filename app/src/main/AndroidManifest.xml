@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.agata.dzienniczekpacjenta">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,29 +30,33 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".Home" />
-        <activity android:name=".Callendar"
+        <activity
+            android:name=".Callendar"
             android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home"/>
+                android:value=".Home" />
         </activity>
-        <activity android:name=".Settings"
+        <activity
+            android:name=".Settings"
             android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home"/>
+                android:value=".Home" />
         </activity>
-        <activity android:name=".Settings2"
+        <activity
+            android:name=".Settings2"
             android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home"/>
+                android:value=".Home" />
         </activity>
-        <activity android:name=".SingIn"
+        <activity
+            android:name=".SingIn"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".SavedUserData"
@@ -57,26 +65,29 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".VisitDetails"
+        <activity
+            android:name=".VisitDetails"
             android:parentActivityName=".Callendar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Callendar" />
         </activity>
-        <activity android:name=".AddMeasurement"
+        <activity
+            android:name=".AddMeasurement"
             android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home"/>
+                android:value=".Home" />
         </activity>
-        <activity android:name=".ListMeasurementDataActivity"
+        <activity
+            android:name=".ListMeasurementDataActivity"
             android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home"/>
+                android:value=".Home" />
         </activity>
-        <activity android:name=".ListOfVisits"></activity>
-        <activity android:name=".VisualizationActivity"></activity>
+        <activity android:name=".ListOfVisits" />
+        <activity android:name=".VisualizationActivity" />
     </application>
 
 </manifest>
