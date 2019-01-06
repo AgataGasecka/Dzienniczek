@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListMeasurementDataActivity extends AppCompatActivity {
-    int id;
+    int UserId;
     DatabaseHelper mDatabaseHelper;
     SQLiteDatabase db;
     ListAdapter listAdapter;
@@ -29,7 +29,7 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        id = getIntent().getIntExtra("ID", 0);
+        UserId = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_list_measurement_data);
         mListView = findViewById(R.id.listView);
         Spinner parameters = (Spinner) findViewById(R.id.wyborRodzajuPomiaru);
@@ -41,7 +41,7 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), VisualizationActivity.class);
-                intent.putExtra("ID", id);
+                intent.putExtra("ID", UserId);
                 intent.putExtra("MEASUREMENT_TYPE", measurement_type);
                 startActivity(intent);
             }
@@ -96,7 +96,7 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
 
         wynikiPomiarow = new ArrayList<>();
 
-        Cursor cursor = mDatabaseHelper.viewMeasurementData();
+        Cursor cursor = mDatabaseHelper.viewMeasurementData(UserId);
         while (cursor.moveToNext()) {
             String data = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Table_Column_data));
             String godzina = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Table_Column_1_hour));
@@ -116,7 +116,7 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
 
         wynikiPomiarow = new ArrayList<>();
 
-        Cursor cursor = mDatabaseHelper.viewFilterMeasurementData(measurement_type);
+        Cursor cursor = mDatabaseHelper.viewFilterMeasurementData(measurement_type, UserId);
         while (cursor.moveToNext()) {
             String data = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Table_Column_data));
             String godzina = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Table_Column_1_hour));

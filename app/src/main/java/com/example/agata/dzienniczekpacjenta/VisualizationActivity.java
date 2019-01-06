@@ -128,12 +128,12 @@ public class VisualizationActivity extends AppCompatActivity {
 
         ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
 
-        for (int i = 0; i < mDatabaseHelper.queryYData(measurement_type).size(); i++)
-            yVals.add(new BarEntry(mDatabaseHelper.queryYData(measurement_type).get(i), i));
+        for (int i = 0; i < mDatabaseHelper.queryYData(measurement_type, id).size(); i++)
+            yVals.add(new BarEntry(mDatabaseHelper.queryYData(measurement_type, id).get(i), i));
 
         ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < mDatabaseHelper.queryXData(measurement_type).size(); i++)
-            xVals.add(mDatabaseHelper.queryXData(measurement_type).get(i));
+        for (int i = 0; i < mDatabaseHelper.queryXData(measurement_type, id).size(); i++)
+            xVals.add(mDatabaseHelper.queryXData(measurement_type, id).get(i));
 
         BarDataSet dataSet = new BarDataSet(yVals, "Pomiar");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);

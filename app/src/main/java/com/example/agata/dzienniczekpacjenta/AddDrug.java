@@ -141,13 +141,12 @@ public class AddDrug extends AppCompatActivity {
 
         btnAdd.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                String userid = "";
                 String data = dataPomiaru.getText().toString();
                 String godzina = godzinaPomiaru.getText().toString();
                 String wynik = wynikPomiaru.getText().toString();
                 String nazwa= nazwaLeku.getText().toString();
                 if (data.length() !=0 & godzina.length() !=0 & wynik.length() !=0){
-                    AddData(userid,data,godzina,nazwa, wynik,drug_parameter_type);
+                    AddData(id,data,godzina,nazwa, wynik,drug_parameter_type);
                     dataPomiaru.setText("");
                     godzinaPomiaru.setText("");
                     wynikPomiaru.setText("");
@@ -214,7 +213,7 @@ public class AddDrug extends AppCompatActivity {
     }
 
 
-    public void AddData(String userid, String date, String hour, String drug_name, String dose, String drug_parameter_type) {
+    public void AddData(int userid, String date, String hour, String drug_name, String dose, String drug_parameter_type) {
         boolean insertData = controllerdb.addDrugsData(userid,date,hour,drug_name,dose, drug_parameter_type);
 
         if (insertData) {

@@ -56,7 +56,7 @@ public class ListOfDrugs extends AppCompatActivity {
 
         wynikiPomiarow = new ArrayList<>();
 
-        Cursor cursor = mDatabaseHelper.viewDrugData();
+        Cursor cursor = mDatabaseHelper.viewDrugData(id);
         while (cursor.moveToNext()) {
             String data = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnData));
             String godzina = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnHour));
@@ -77,7 +77,7 @@ public class ListOfDrugs extends AppCompatActivity {
 
         wynikiPomiarow = new ArrayList<>();
 
-        Cursor cursor = mDatabaseHelper.viewFilterDrugsData(drug_parameter_type);
+        Cursor cursor = mDatabaseHelper.viewFilterDrugsData(drug_parameter_type, id);
         while (cursor.moveToNext()) {
             String data = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnData));
             String godzina = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnHour));

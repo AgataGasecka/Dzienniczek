@@ -49,6 +49,7 @@ public class Home extends AppCompatActivity {
 
     public void goToListMeasurementDataActivity(View view){
         Intent intent = new Intent(this, ListMeasurementDataActivity.class);
+        intent.putExtra("ID", id);
         startActivity(intent);
     }
 

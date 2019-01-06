@@ -79,12 +79,11 @@ public class AddMeasurement extends AppCompatActivity {
 
         btnAdd.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                String userid = "";
                 String data = dataPomiaru.getText().toString();
                 String godzina = godzinaPomiaru.getText().toString();
                 String wynik = wynikPomiaru.getText().toString();
                 if (data.length() !=0 & godzina.length() !=0 & wynik.length() !=0){
-                    AddData(userid,data,godzina,wynik,measurement_type);
+                    AddData(id,data,godzina,wynik,measurement_type);
                     dataPomiaru.setText("Ustaw datę");
                     godzinaPomiaru.setText("Ustaw godzinę");
                     wynikPomiaru.setText("");
@@ -140,7 +139,7 @@ public class AddMeasurement extends AppCompatActivity {
     }
 
 
-    public void AddData(String userid, String data, String hour, String measurement, String measurement_type) {
+    public void AddData(int userid, String data, String hour, String measurement, String measurement_type) {
         boolean insertData = controllerdb.addMeasurementData(userid,data,hour, measurement,measurement_type);
 
         if (insertData) {
