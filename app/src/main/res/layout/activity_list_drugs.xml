@@ -19,10 +19,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp"
             android:paddingTop="0dp"
+            android:paddingRight="30dp"
             android:paddingBottom="0dp"
-            android:text="Nazwa leku: "
+            android:text="Parametr: "
             android:textAlignment="center"
             android:textColor="@color/colorText"
             android:textSize="17sp" />
@@ -31,11 +31,11 @@
             android:id="@+id/wyborRodzajuPomiaruDrug"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:entries="@array/drugs_array"
+            android:entries="@array/parameters_array"
             android:paddingLeft="0dp"
-            android:paddingRight="0dp"
             android:paddingTop="0dp"
-            android:paddingBottom="0dp"/>
+            android:paddingRight="0dp"
+            android:paddingBottom="0dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,17 +59,17 @@
         android:paddingRight="5dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:weightSum="3">
+        android:weightSum="4">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorBlue"
-            android:text="Data"
+            android:text="Dzień"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -79,7 +79,18 @@
             android:text="Godzina"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorBlue"
+            android:text="Lek"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -89,7 +100,8 @@
             android:text="Dawka"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="20dp" />
+
     </LinearLayout>
 
     <ListView

@@ -21,7 +21,7 @@ public class ListOfDrugs extends AppCompatActivity {
     ListDrugAdapter listAdapter;
     ListView mListView;
     List<Drug> wynikiPomiarow;
-    public String drug_type;
+    public String drug_parameter_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class ListOfDrugs extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(ListOfDrugs.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
-                drug_type=parent.getItemAtPosition(position).toString();
+                drug_parameter_type=parent.getItemAtPosition(position).toString();
                 populateFilterListView();
             }
 
@@ -56,13 +56,14 @@ public class ListOfDrugs extends AppCompatActivity {
 
         wynikiPomiarow = new ArrayList<>();
 
-        Cursor cursor = mDatabaseHelper.viewMeasurementData();
+        Cursor cursor = mDatabaseHelper.viewDrugData();
         while (cursor.moveToNext()) {
             String data = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnData));
             String godzina = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnHour));
+            String nazwa = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnDrugName));
             String pomiar = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnDrugDose));
 
-            wynikiPomiarow.add(new Drug(data, godzina, pomiar));
+            wynikiPomiarow.add(new Drug(data, godzina, nazwa, pomiar));
         }
         cursor.close();
 
@@ -76,13 +77,14 @@ public class ListOfDrugs extends AppCompatActivity {
 
         wynikiPomiarow = new ArrayList<>();
 
-        Cursor cursor = mDatabaseHelper.viewFilterMeasurementData(drug_type);
+        Cursor cursor = mDatabaseHelper.viewFilterDrugsData(drug_parameter_type);
         while (cursor.moveToNext()) {
             String data = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnData));
             String godzina = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnHour));
+            String nazwa = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnDrugName));
             String pomiar = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.ColumnDrugDose));
 
-            wynikiPomiarow.add(new Drug(data, godzina, pomiar));
+            wynikiPomiarow.add(new Drug(data, godzina,nazwa, pomiar));
         }
         cursor.close();
 

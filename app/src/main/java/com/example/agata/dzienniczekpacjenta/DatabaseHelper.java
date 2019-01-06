@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "dzienniczek1.db";
+    public static final String DATABASE_NAME = "dzienniczek4.db";
     public static final String USERS_TABLE = "users";
     public static final String PATIENT_TABLE = "patient";
     public static final String VISITS_TABLE = "visits";
@@ -32,8 +32,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //DRUGS
     public static final String ColumnData="DATE";
     public static final String ColumnHour="HOUR";
-    public static final String ColumnDrugDose="DRUG"; //DOSE OF DRUG
-    public static final String ColumnDrugType="DRUG_TYPE";
+    public static final String ColumnDrugName="DRUG_NAME";
+    public static final String ColumnDrugDose="DOSE"; //DOSE OF DRUG
+    public static final String ColumnDrugParameterType= "DRUG_PARAMETER_TYPE";
 
     public static final String Visits_Date = "DATE";
     public static final String Visits_Hour = "HOUR";
@@ -88,9 +89,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "USER_ID INTEGER, " +
                 "DATE TEXT, " +
-                " HOUR TEXT," +
-                "DRUGS TEXT," +
-                "DRUGS_TYPE TEXT)";
+                "HOUR TEXT," +
+                "DRUG_NAME TEXT," +
+                "DOSE TEXT," +
+                "DRUG_PARAMETER_TYPE TEXT)";
         db.execSQL(drugsQuery);
     }
 
@@ -293,14 +295,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean addDrugsData(String userid, String date, String hour, String drugs, String drugs_type){
+    public boolean addDrugsData(String userid, String date, String hour, String drug_name, String dose, String drug_parameter_type){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("USER_ID", userid);
         contentValues.put("DATE", date);
         contentValues.put("HOUR", hour);
-        contentValues.put("DRUGS", drugs);
-        contentValues.put("DRUGS_TYPE", drugs_type);
+        contentValues.put("DRUG_NAME", drug_name);
+        contentValues.put("DOSE", dose);
+        contentValues.put("DRUG_PARAMETER_TYPE", drug_parameter_type);
 
         Log.d(TAG, "addData: Adding data to " + DRUGS_TABLE);
 
@@ -316,7 +319,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor viewDrugData() {
         SQLiteDatabase db = this.getReadableDatabase();
-        AddDrug addMeasurement = new AddDrug();
+     //   AddDrug addMeasurement = new AddDrug();
         //    String query= "SELECT * FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
         //  Cursor cursor=db.rawQuery(query, new String[]{"Ciśnienie"});
         String query= "SELECT * FROM " + DRUGS_TABLE ;
@@ -328,8 +331,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor viewFilterDrugsData(String drugs_type) {
         SQLiteDatabase db = this.getReadableDatabase();
         //zmienic na drug
-        ListMeasurementDataActivity list = new ListMeasurementDataActivity();
-        String query= "SELECT * FROM " + DRUGS_TABLE + " WHERE " + ColumnDrugType + "=?";
+       // ListMeasurementDataActivity list = new ListMeasurementDataActivity();
+        String query= "SELECT * FROM " + DRUGS_TABLE + " WHERE " + ColumnDrugParameterType + "=?";
         Cursor cursor=db.rawQuery(query, new String[]{drugs_type});
         return cursor;
     }

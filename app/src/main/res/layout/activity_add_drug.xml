@@ -10,10 +10,10 @@
     <Button
         android:id="@+id/wyswietl_pomiaryDrug"
         android:layout_width="109dp"
-        android:layout_height="63dp"
+        android:layout_height="92dp"
         android:layout_marginStart="51dp"
-        android:layout_marginEnd="53dp"
-        android:text="Wyświetl raport"
+        android:layout_marginEnd="60dp"
+        android:text="Wyświetl listę leków"
         app:layout_constraintBaseline_toBaselineOf="@+id/dodajpomiarDrug"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dodajpomiar" />
@@ -21,12 +21,12 @@
     <Button
         android:id="@+id/dodajpomiarDrug"
         android:layout_width="119dp"
-        android:layout_height="63dp"
+        android:layout_height="90dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="51dp"
+        android:layout_marginEnd="47dp"
         android:layout_marginBottom="67dp"
-        android:text="Dodaj dawkowanie"
+        android:text="Dodaj"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/wyswietl_pomiaryDrug"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         android:layout_marginStart="45dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Ustaw datę"
+        android:text="Ustaw dzień"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView20"
         app:layout_constraintStart_toEndOf="@+id/textView20" />
@@ -58,8 +58,8 @@
 
     <EditText
         android:id="@+id/wynikPomiaruDrug"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
         android:layout_marginStart="25dp"
         android:ems="10"
         android:hint="Podaj dawke leku (ilość tabletek)"
@@ -91,12 +91,12 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="45dp"
         android:layout_marginBottom="20dp"
-        android:text="Data"
+        android:text="Dzień"
         android:textColor="@color/colorText"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/textView21"
         app:layout_constraintEnd_toStartOf="@+id/dataPomiaruDrug"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rodzajParametruPomiaru" />
 
@@ -113,6 +113,7 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/textView22"
         app:layout_constraintEnd_toStartOf="@+id/godzinaPomiaruDrug"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
@@ -137,19 +138,20 @@
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginStart="58dp"
-        android:entries="@array/drugs_array"
-        app:layout_constraintBaseline_toBaselineOf="@+id/rodzajParametruPomiaru"
-        app:layout_constraintStart_toEndOf="@+id/rodzajParametruPomiaru" />
+        android:layout_marginTop="15dp"
+        android:entries="@array/parameters_array"
+        app:layout_constraintStart_toEndOf="@+id/rodzajParametruPomiaru"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <TextView
         android:id="@+id/rodzajParametruPomiaru"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="58dp"
         android:layout_marginBottom="20dp"
-        android:text="Nazwa leku"
+        android:text="Parametr:"
         android:textColor="@color/colorText"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/textView20"
@@ -162,12 +164,13 @@
         android:layout_width="40dp"
         android:layout_height="35dp"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/kalendarz"
         app:layout_constraintBottom_toTopOf="@+id/ustawGodzineDrug"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/dataPomiaruDrug"
         app:layout_constraintTop_toBottomOf="@+id/wyborRodzajuPomiaruDrug"
         app:layout_constraintVertical_chainStyle="spread_inside" />
@@ -177,11 +180,41 @@
         android:layout_width="40dp"
         android:layout_height="35dp"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="70dp"
         android:src="@drawable/zegar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/godzinaPomiaruDrug"
         app:layout_constraintTop_toBottomOf="@+id/ustawDateDrug" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="Nazwa leku"
+        android:textColor="@color/colorText"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.004"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rodzajParametruPomiaru" />
+
+    <EditText
+        android:id="@+id/nazwaLeku"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Podaj nazwe:"
+        app:layout_constraintBottom_toTopOf="@+id/dataPomiaruDrug"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/wyborRodzajuPomiaruDrug"
+        app:layout_constraintVertical_bias="0.272" />
 
 </android.support.constraint.ConstraintLayout>
