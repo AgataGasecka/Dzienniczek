@@ -2,10 +2,12 @@ package com.example.agata.dzienniczekpacjenta;
 
 import android.app.AlertDialog;
 import android.os.Build;
+import android.provider.AlarmClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 
 public class Home extends AppCompatActivity {
 
@@ -16,12 +18,21 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_home);
+
+        Button ustawienia= (Button) findViewById(R.id.button5);
+        ustawienia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToSettings();
+            }
+        });
     }
 
-    public void goToSettings(View view){
+    public void goToSettings(){
         Intent intent = new Intent(this, Settings.class);
         intent.putExtra("ID", id);
         startActivity(intent);
+
     }
 
     public void goToCalendar(View view){

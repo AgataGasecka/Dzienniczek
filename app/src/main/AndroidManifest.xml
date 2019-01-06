@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
 
     <application
@@ -29,7 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".Home" />
+        <activity android:name=".Home" android:exported="true"/>
         <activity
             android:name=".Callendar"
             android:parentActivityName=".Home">
@@ -99,6 +100,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home"/>
         </activity>
+
         <activity android:name=".ListOfVisits"
             android:parentActivityName=".Callendar">
             <meta-data

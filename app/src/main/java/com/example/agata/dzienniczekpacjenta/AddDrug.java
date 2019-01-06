@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -59,7 +60,7 @@ public class AddDrug extends AppCompatActivity {
         final TextView ustawDate = (TextView) findViewById(R.id.dataPomiaruDrug);
         final TextView nazwaLeku = (TextView) findViewById(R.id.nazwaLeku);
         date= (ImageButton) findViewById(R.id.ustawDateDrug);
-
+        Button alarmLek = (Button) findViewById(R.id.AlarmLek);
 
         date.setOnClickListener(new View.OnClickListener() {
 
@@ -197,6 +198,17 @@ public class AddDrug extends AppCompatActivity {
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Wybierz godzinę");
                 mTimePicker.show();
+            }
+        });
+
+        alarmLek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent= new Intent(AlarmClock.ACTION_SET_ALARM);
+                intent.putExtra(AlarmClock.EXTRA_HOUR,10);
+                intent.putExtra(AlarmClock.EXTRA_MINUTES,10);
+                startActivity(intent);
             }
         });
     }
