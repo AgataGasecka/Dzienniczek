@@ -158,6 +158,9 @@ public class Settings2 extends AppCompatActivity {
         }
         else{
             correctly = helper.insertUserSettings(id, measurement_type, measurement_standard_up, measurement_standard_down, measurement_unit);
+            Intent intent = new Intent(this, Home.class);
+            intent.putExtra("ID", id);
+            startActivityForResult(intent, 1);
         }
 
         if(correctly){
