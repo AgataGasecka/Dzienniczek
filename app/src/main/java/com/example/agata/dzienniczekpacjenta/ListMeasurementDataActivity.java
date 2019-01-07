@@ -1,8 +1,13 @@
 package com.example.agata.dzienniczekpacjenta;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +18,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.agata.dzienniczekpacjenta.DatabaseHelper.MEASUREMETS_TABLE;
+import static com.example.agata.dzienniczekpacjenta.DatabaseHelper.Table_Column_1_hour;
+import static com.example.agata.dzienniczekpacjenta.DatabaseHelper.Table_Column_2_measurement;
+import static com.example.agata.dzienniczekpacjenta.DatabaseHelper.Table_Column_3_measurement_type;
+import static com.example.agata.dzienniczekpacjenta.DatabaseHelper.Table_Column_data;
 
 public class ListMeasurementDataActivity extends AppCompatActivity {
     int UserId;
@@ -62,6 +76,79 @@ public class ListMeasurementDataActivity extends AppCompatActivity {
 
             }
         });
+
+        //kod do eksportu do csv
+        Button export=findViewById(R.id.export);
+
+        int writeExternalStoragePermission = ContextCompat.checkSelfPermission (ListMeasurementDataActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        // Jeśli nie przyznawaj uprawnień do zapisu zewnętrznego.
+        if (writeExternalStoragePermission!= PackageManager.PERMISSION_GRANTED)
+        {
+            // Poproś użytkownika o nadanie uprawnień do zapisu w pamięci zewnętrznej.
+            ActivityCompat.requestPermissions (ListMeasurementDataActivity.this, new String [] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+
+        export.setOnClickListener(new View.OnClickListener() {
+            Cursor c = null;
+
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    String query =  "SELECT " + Table_Column_data +"," + Table_Column_1_hour+ "," + Table_Column_2_measurement + "," + Table_Column_3_measurement_type+ " FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?  ";//AND USER_ID=" + id;
+                    c = db.rawQuery(query,  new String[]{measurement_type});
+                    int rowcount = 0;
+                    int colcount = 0;
+                    File sdCardDir = Environment.getExternalStorageDirectory();
+                    String filename = "wyniki_z_dzienniczka_pacjenta.csv";
+                    // the name of the file to export with
+                    File saveFile = new File(sdCardDir, filename);
+                    FileWriter fw = new FileWriter(saveFile);
+
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    rowcount = c.getCount();
+                    colcount = c.getColumnCount();
+                    if (rowcount > 0) {
+                        c.moveToFirst();
+
+                        for (int i = 0; i < colcount; i++) {
+                            if (i != colcount - 1) {
+
+                                bw.write(c.getColumnName(i) + ",");
+
+                            } else {
+
+                                bw.write(c.getColumnName(i));
+
+                            }
+                        }
+                        bw.newLine();
+
+                        for (int i = 0; i < rowcount; i++) {
+                            c.moveToPosition(i);
+
+                            for (int j = 0; j < colcount; j++) {
+                                if (j != colcount - 1)
+                                    bw.write(c.getString(j) + ",");
+                                else
+                                    bw.write(c.getString(j));
+                            }
+                            bw.newLine();
+                        }
+                        bw.flush();
+                        Toast.makeText(ListMeasurementDataActivity.this, "Wyniki zostały wyeksportowane!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception ex) {
+                    if (db.isOpen()) {
+                        db.close();
+                        Toast.makeText(ListMeasurementDataActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+        });
+        //koniec kodu do eksportu
     }
 
     private void setUnit(){

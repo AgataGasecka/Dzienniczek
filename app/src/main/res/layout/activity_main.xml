@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
     <ImageView
@@ -33,6 +34,8 @@
         android:layout_marginBottom="10dp"
         android:onClick="singIn"
         android:text="@string/signIn"
+        android:textColor="#ffffffff"
+        android:background="@drawable/buttonshape"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +52,8 @@
         android:layout_marginBottom="100dp"
         android:onClick="createAnAccount"
         android:text="@string/singUp"
+        android:textColor="#ffffffff"
+        android:background="@drawable/buttonshape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

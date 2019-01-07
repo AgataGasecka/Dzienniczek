@@ -10,37 +10,64 @@
         android:id="@+id/barchart"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></com.github.mikephil.charting.charts.BarChart>
+        app:layout_constraintTop_toBottomOf="@+id/textView26"></com.github.mikephil.charting.charts.BarChart>
 
     <TextView
         android:id="@+id/wartoscNormatywna"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="72dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:text="wartoscNormatywna"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView24"
+        app:layout_constraintStart_toEndOf="@+id/textView24" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="Wartość normy: "
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView26"
+        app:layout_constraintEnd_toStartOf="@+id/wartoscNormatywna"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/export"
+    <TextView
+        android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="31dp"
-        android:text="eksportuj"
-        app:layout_constraintBottom_toTopOf="@+id/barchart"
-        app:layout_constraintEnd_toStartOf="@+id/wartoscNormatywna"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="46dp"
+        android:text="Jednostka:"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/unit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+    <TextView
+        android:id="@+id/unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:text="TextView"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView26"
+        app:layout_constraintStart_toEndOf="@+id/textView26" />
 
 </android.support.constraint.ConstraintLayout>

@@ -8,6 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:weightSum="3">
 
         <TextView
@@ -15,32 +19,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:background="@color/colorHeadTab"
             android:text="Data"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="28sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/visitHour"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:background="@color/colorHeadTab"
             android:text="Godzina"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="28sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/visitDoctor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:background="@color/colorHeadTab"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="28sp" />
+            android:textSize="22sp" />
     </LinearLayout>
     <ListView
         android:id="@+id/visitsList"

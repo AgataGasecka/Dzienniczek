@@ -73,6 +73,8 @@
         android:layout_marginBottom="62dp"
         android:onClick="goToHomePage"
         android:text="@string/signIn"
+        android:textColor="#ffffffff"
+        android:background="@drawable/buttonshape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

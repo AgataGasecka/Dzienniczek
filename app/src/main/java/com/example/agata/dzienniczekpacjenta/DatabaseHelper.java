@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "dzienniczek5.db";
+    public static final String DATABASE_NAME = "dzienniczek7.db";
     public static final String USERS_TABLE = "users";
     public static final String PATIENT_TABLE = "patient";
     public static final String VISITS_TABLE = "visits";
@@ -272,14 +272,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return xNewData;
     }
 
-    public ArrayList<Integer> queryYData(String measurement_type, int id) {
-        ArrayList<Integer> yNewData = new ArrayList<Integer>();
+    public ArrayList<Float> queryYData(String measurement_type, int id) {
+        ArrayList<Float> yNewData = new ArrayList<Float>();
+
         ListMeasurementDataActivity list = new ListMeasurementDataActivity();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT " + Table_Column_2_measurement + " FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=\"" + measurement_type + "\" AND USER_ID=" + id;
         Cursor cursor = db.rawQuery(query, null);
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            yNewData.add(cursor.getInt(cursor.getColumnIndex(Table_Column_2_measurement)));
+            yNewData.add(cursor.getFloat(cursor.getColumnIndex(Table_Column_2_measurement)));
         }
         cursor.close();
         return yNewData;
@@ -289,10 +290,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = null;
         String result = "";
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "Select DEFAULTVALUE from " + SETTINGS_TABLE + " WHERE " + Table_Column_parameter_name + "=? AND USER_ID=" + userId;
+        String query = "Select DEFAULTVALUEUP from " + SETTINGS_TABLE + " WHERE " + Table_Column_parameter_name + "=? AND USER_ID=" + userId;
         cursor = db.rawQuery(query, new String[]{measurement_type});
         if(cursor.moveToFirst()){
-            result = cursor.getString(cursor.getColumnIndex("DEFAULTVALUE"));
+            result = cursor.getString(cursor.getColumnIndex("DEFAULTVALUEUP"));
         }
         cursor.close();
         return result;
@@ -322,7 +323,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor viewDrugData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-     //   AddDrug addMeasurement = new AddDrug();
+        //   AddDrug addMeasurement = new AddDrug();
         //    String query= "SELECT * FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?";
         //  Cursor cursor=db.rawQuery(query, new String[]{"Ciśnienie"});
         String query= "SELECT * FROM " + DRUGS_TABLE + " WHERE USER_ID=" + id ;
@@ -334,7 +335,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor viewFilterDrugsData(String drugs_type, int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         //zmienic na drug
-       // ListMeasurementDataActivity list = new ListMeasurementDataActivity();
+        // ListMeasurementDataActivity list = new ListMeasurementDataActivity();
         String query= "SELECT * FROM " + DRUGS_TABLE + " WHERE " + ColumnDrugParameterType + "=? AND USER_ID=" + id;
         Cursor cursor=db.rawQuery(query, new String[]{drugs_type});
         return cursor;

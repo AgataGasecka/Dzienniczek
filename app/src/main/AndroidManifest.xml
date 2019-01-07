@@ -107,7 +107,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Callendar"/>
         </activity>
-        <activity android:name=".VisualizationActivity" />
+        <activity android:name=".VisualizationActivity"
+            android:parentActivityName=".ListMeasurementDataActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListMeasurementDataActivity"/>
+        </activity>
     </application>
 
 </manifest>

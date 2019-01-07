@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -50,79 +51,8 @@ public class VisualizationActivity extends AppCompatActivity {
         mDatabaseHelper = new DatabaseHelper(this);
         db = mDatabaseHelper.getWritableDatabase();
         ListMeasurementDataActivity list = new ListMeasurementDataActivity();
-
-        //kod do eksportu do csv
-        Button export=findViewById(R.id.export);
-
-        int writeExternalStoragePermission = ContextCompat.checkSelfPermission (VisualizationActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-// Jeśli nie przyznawaj uprawnień do zapisu zewnętrznego.
-        if (writeExternalStoragePermission!= PackageManager.PERMISSION_GRANTED)
-        {
-            // Poproś użytkownika o nadanie uprawnień do zapisu w pamięci zewnętrznej.
-            ActivityCompat.requestPermissions (VisualizationActivity.this, new String [] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }
-
-        export.setOnClickListener(new View.OnClickListener() {
-            Cursor c = null;
-
-            @Override
-            public void onClick(View v) {
-
-                try {
-                    String query =  "SELECT " + Table_Column_data +"," + Table_Column_1_hour+ "," + Table_Column_2_measurement + "," + Table_Column_3_measurement_type+ " FROM " + MEASUREMETS_TABLE + " WHERE " + Table_Column_3_measurement_type + "=?  ";//AND USER_ID=" + id;
-                    c = db.rawQuery(query,  new String[]{measurement_type});
-                    int rowcount = 0;
-                    int colcount = 0;
-                    File sdCardDir = Environment.getExternalStorageDirectory();
-                    String filename = "wyniki_z_dzienniczka_pacjenta.csv";
-                    // the name of the file to export with
-                    File saveFile = new File(sdCardDir, filename);
-                    FileWriter fw = new FileWriter(saveFile);
-
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    rowcount = c.getCount();
-                    colcount = c.getColumnCount();
-                    if (rowcount > 0) {
-                        c.moveToFirst();
-
-                        for (int i = 0; i < colcount; i++) {
-                            if (i != colcount - 1) {
-
-                                bw.write(c.getColumnName(i) + ",");
-
-                            } else {
-
-                                bw.write(c.getColumnName(i));
-
-                            }
-                        }
-                        bw.newLine();
-
-                        for (int i = 0; i < rowcount; i++) {
-                            c.moveToPosition(i);
-
-                            for (int j = 0; j < colcount; j++) {
-                                if (j != colcount - 1)
-                                    bw.write(c.getString(j) + ",");
-                                else
-                                    bw.write(c.getString(j));
-                            }
-                            bw.newLine();
-                        }
-                        bw.flush();
-                        Toast.makeText(VisualizationActivity.this, "Wyniki zostały wyeksportowane!", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception ex) {
-                    if (db.isOpen()) {
-                        db.close();
-                        Toast.makeText(VisualizationActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-        });
-        //koniec kodu do eksportu
-
+        TextView wartoscNorm = (TextView) findViewById(R.id.wartoscNormatywna);
+        TextView jednostka = (TextView) findViewById(R.id.unit);
 
         BarChart barChart = (BarChart) findViewById(R.id.barchart);
 
@@ -139,12 +69,13 @@ public class VisualizationActivity extends AppCompatActivity {
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         BarData data = new BarData(xVals, dataSet);
-//zrobic zeby maxCapasity to byla wartosc pobierana z bazy defaultvalue w zaleznosci
+        //zrobic zeby maxCapasity to byla wartosc pobierana z bazy defaultvalue w zaleznosci
         //od id i od parametru measurement_type
         int maxCapacity=120;
-        // String norm=mDatabaseHelper.viewParameterNorm(measurement_type, id);
-        // float maxNorm=Float.valueOf(norm);
-        LimitLine ll = new LimitLine(maxCapacity, "Norma");
+        String norm=mDatabaseHelper.viewParameterNorm(measurement_type, id);
+        Float maxNorm=Float.parseFloat(norm);
+        wartoscNorm.setText(String.valueOf(maxNorm));
+        LimitLine ll = new LimitLine(maxNorm, "Norma");
 
         ll.setTextSize(4f);
         ll.setLineColor(Color.RED);
@@ -155,22 +86,38 @@ public class VisualizationActivity extends AppCompatActivity {
         switch(measurement_type){
             case "Ciśnienie":
                 barChart.setDescription("Wykres ciśnienia w poszczególnych dniach");
+                dataSet.setLabel("mmHg");
+                jednostka.setText("mmHg");
+
                 break;
             case "Cukier":
-                barChart.setDescription("Wykres cukieru w poszczególnych dniach");
+                barChart.setDescription("Wykres cukru w poszczególnych dniach");
+                dataSet.setLabel("mg/dl");
+                jednostka.setText("mg/dl");
+
                 break;
             case "Waga":
                 barChart.setDescription("Wykres wagi w poszczególnych dniach");
+                dataSet.setLabel("kg");
+                jednostka.setText("kg");
+
                 break;
             case "Temperatura":
                 barChart.setDescription("Wykres temperatury w poszczególnych dniach");
+                dataSet.setLabel("stopnie Celsjusza");
+                jednostka.setText("stopnie Celsjusza");
+
                 break;
             case "Puls":
                 barChart.setDescription("Wykres pulsu w poszczególnych dniach");
+                dataSet.setLabel("udzerzenia/min");
+                jednostka.setText("udzerzenia/min");
+
                 break;
 
         }
-        barChart.animateY(2000);
+        barChart.animateY(1000);
+
 
 
 

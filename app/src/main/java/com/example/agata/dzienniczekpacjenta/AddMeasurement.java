@@ -108,6 +108,7 @@ public class AddMeasurement extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //   Toast.makeText(AddMeasurement.this, "Wybrano opcję" + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
                 measurement_type=parent.getItemAtPosition(position).toString();
+                setUnit();
             }
 
             @Override
@@ -150,6 +151,30 @@ public class AddMeasurement extends AppCompatActivity {
     }
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setUnit(){
+        TextView unit = (TextView) findViewById(R.id.unitMeasurement);
+
+        switch(measurement_type){
+            case "Ciśnienie":
+                unit.setText("mmHg");
+                break;
+            case "Cukier":
+                unit.setText("mg/dl");
+                break;
+            case "Waga":
+                unit.setText("kg");
+                break;
+            case "Temperatura":
+                unit.setText("stopnie Celsjusza");
+                break;
+            case "Puls":
+                unit.setText("70 uderzeń/min");
+                break;
+            default:
+                break;
+        }
     }
 
 }
