@@ -61,12 +61,21 @@ intent.putExtra("hourOfVisit", hour);
 
             }
         });
+
     }
 
     public void goToVisitsList(View view){
         Intent intent = new Intent(this, ListOfVisits.class);
         intent.putExtra("ID", id);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("ID", id);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 }

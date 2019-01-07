@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "dzienniczek5.db";
+    public static final String DATABASE_NAME = "dzienniczek6.db";
     public static final String USERS_TABLE = "users";
     public static final String PATIENT_TABLE = "patient";
     public static final String VISITS_TABLE = "visits";
@@ -337,6 +337,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
        // ListMeasurementDataActivity list = new ListMeasurementDataActivity();
         String query= "SELECT * FROM " + DRUGS_TABLE + " WHERE " + ColumnDrugParameterType + "=? AND USER_ID=" + id;
         Cursor cursor=db.rawQuery(query, new String[]{drugs_type});
+        return cursor;
+    }
+
+    public Cursor GetUser(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(DatabaseHelper.USERS_TABLE, new String[]{"ID", "NAME", "SURNAME", "BIRTHDAY", "PESEL", "SEX"}, "ID=" + id, null, null, null, null);
         return cursor;
     }
 }

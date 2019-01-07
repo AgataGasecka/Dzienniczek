@@ -21,6 +21,10 @@ import java.util.regex.Pattern;
 public class Settings extends AppCompatActivity {
     int id;
     DatabaseHelper helper;
+    EditText nameField;
+    EditText surnameField;
+    EditText birthdayField;
+    EditText peselField;
     String patientName;
     String patientSurname;
     String patientBirthday;
@@ -37,14 +41,37 @@ public class Settings extends AppCompatActivity {
         id = getIntent().getIntExtra("ID", 0);
         setContentView(R.layout.activity_settings);
         helper = new DatabaseHelper(this);
+        nameField = (EditText)findViewById(R.id.patientName);
+        surnameField = (EditText)findViewById(R.id.patientSurname);
+        birthdayField = (EditText)findViewById(R.id.patientBirthday);
+        peselField = (EditText)findViewById(R.id.patientPesel);
+        showUserData();
     }
+
+
+
+    public void showUserData(){
+        Cursor cursor = helper.GetUser(id);
+        if(cursor.moveToFirst()){
+            patientName = cursor.getString(cursor.getColumnIndex("NAME"));
+            patientSurname = cursor.getString(cursor.getColumnIndex("SURNAME"));
+            patientBirthday = cursor.getString(cursor.getColumnIndex("BIRTHDAY"));
+            patientPesel = cursor.getString(cursor.getColumnIndex("PESEL"));
+        }
+
+        nameField.setText(patientName);
+        surnameField.setText(patientSurname);
+        birthdayField.setText(patientBirthday);
+        peselField.setText(patientPesel);
+    }
+
 
     public void saveDataForNewPatient(View view){
 
-        patientName = ((EditText)findViewById(R.id.patientName)).getText().toString().trim();
-        patientSurname = ((EditText)findViewById(R.id.patientSurname)).getText().toString().trim();
-        patientBirthday = ((EditText)findViewById(R.id.patientBirthday)).getText().toString().trim();
-        patientPesel = ((EditText)findViewById(R.id.patientPesel)).getText().toString().trim();
+        patientName = (nameField).getText().toString().trim();
+        patientSurname = (surnameField).getText().toString().trim();
+        patientBirthday = (birthdayField).getText().toString().trim();
+        patientPesel = (peselField).getText().toString().trim();
 
         Pattern VALID_NAME_REGEX =
                 Pattern.compile("^(?i)^(?:[a-z]+(?: |\\. ?)?)+[a-z]$", Pattern.CASE_INSENSITIVE);
@@ -66,7 +93,8 @@ public class Settings extends AppCompatActivity {
             message =  "Wpisz poprawne dane";
             showAlert(title, message);*/
             Intent intent = new Intent(this, Settings2.class);
-            startActivity(intent);
+            intent.putExtra("ID", id);
+            startActivityForResult(intent, 1);
         }
         else{
                 boolean saved = helper.updateUser(patientName, patientSurname, patientBirthday, patientPesel, patientSex, id);
@@ -75,7 +103,8 @@ public class Settings extends AppCompatActivity {
                     message = "Dane pacjenta zostały zapisane.";
                     showAlert(title, message);
                     Intent intent = new Intent(this, Settings2.class);
-                    startActivity(intent);
+                    intent.putExtra("ID", id);
+                    startActivityForResult(intent, 1);
                 }
                 else{
                     title = "UWAGA!";
@@ -138,6 +167,21 @@ public class Settings extends AppCompatActivity {
     public void goToHomePage(View view){
         Intent intent = new Intent(this, Settings2.class);
         intent.putExtra("ID", id);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("ID", id);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            id = getIntent().getIntExtra("ID", 0);
+        }
     }
 }
