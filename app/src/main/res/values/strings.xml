@@ -22,12 +22,13 @@
     <string name="aboutTakingMedicines">Konieczności zażycia leków</string>
     <string name="aboutMakingMeasurement">Konieczności wykonania pomiaru</string>
     <string name="next">Dalej</string>
-    <string name="wantRemindersAbout">Chcę otrzymywać powiadomienia o</string>
+    <string name="selectionOfMeasurements">Wybór pomiarów</string>
     <string name="newNorm">Nowa norma</string>
     <string name="norm">Norma</string>
     <string name="changeNorm">Zmień normę</string>
+    <string name="returnNorm">Przywróć normę</string>
     <string name="patientData">Dane pacjenta</string>
-    <string name="selectParameter">Wybierz parametr</string>
+    <string name="selectParameter">Parametr</string>
     <string name="parameterData">Data</string>
     <string name="parameterGodzina">Godzina</string>
     <string name="parameterWynik">Wynik</string>
@@ -60,11 +61,13 @@
         <item>Niedziela</item>
     </string-array>
     <string-array name="drugs_array">
-        <item>Apap</item>
-        <item>NeoMag Cardio</item>
-        <item>Insulina</item>
-        <item>Paracetamol</item>
-        <item>Morfina</item>
+        <item>Ciśnienie</item>
+        <item>Cukier</item>
+        <item>Waga</item>
+        <item>Temperatura</item>
+        <item>Puls</item>
+        <item>Suplement</item>
+        <item>Inne</item>
     </string-array>
     <string-array name="reminders_array">
         <item>Tego samego dnia</item>

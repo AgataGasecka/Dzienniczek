@@ -30,7 +30,7 @@ public class SavedUserData extends AppCompatActivity {
         TextView email  = (TextView)findViewById(R.id.email);
         TextView info = (TextView)findViewById(R.id.info);
 
-        info.setText("Utworzono konto użytkownika");
+        info.setText("Utworzono konto");
 
         try{
             SQLiteOpenHelper databaseHelper = new DatabaseHelper(this);

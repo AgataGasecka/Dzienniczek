@@ -147,8 +147,8 @@ public class AddDrug extends AppCompatActivity {
                 String nazwa= nazwaLeku.getText().toString();
                 if (data.length() !=0 & godzina.length() !=0 & wynik.length() !=0){
                     AddData(id,data,godzina,nazwa, wynik,drug_parameter_type);
-                    dataPomiaru.setText("");
-                    godzinaPomiaru.setText("");
+                    dataPomiaru.setText("Ustaw datę");
+                    godzinaPomiaru.setText("Ustaw godzinę");
                     wynikPomiaru.setText("");
                     nazwaLeku.setText("");
                 } else {

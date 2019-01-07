@@ -82,7 +82,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "USER_ID INTEGER, " +
                 "PARAMETERNAME TEXT, " +
-                "DEFAULTVALUE TEXT)";
+                "DEFAULTVALUEUP TEXT," +
+                "DEFAULTVALUEDOWN TEXT," +
+                "UNIT TEXT)";
         db.execSQL(settingsQuery);
 
         String drugsQuery = "create table " + DRUGS_TABLE +
@@ -158,7 +160,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             if (!ifDataExists(db, USERS_TABLE, "ID", String.valueOf(userId))) {
-
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("NAME", patientName);
                 contentValues.put("SURNAME", patientSurname);
@@ -209,7 +210,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean insertUserSettings(int userId, String parametrName, String parametrStandard) {
+    public boolean insertUserSettings(int userId, String parametrName, String parametrStandardUp, String parametrStandardDown, String parametrUnit) {
 
         long result;
 
@@ -217,7 +218,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put("USER_ID", userId);
             contentValues.put("PARAMETERNAME", parametrName);
-            contentValues.put("DEFAULTVALUE", parametrStandard);
+            contentValues.put("DEFAULTVALUEUP", parametrStandardUp);
+            contentValues.put("DEFAULTVALUEDOWN", parametrStandardDown);
+            contentValues.put("UNIT", parametrUnit);
             result = db.insert(SETTINGS_TABLE, null, contentValues);
         }
 

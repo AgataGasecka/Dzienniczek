@@ -22,7 +22,7 @@
             android:paddingTop="0dp"
             android:paddingRight="30dp"
             android:paddingBottom="0dp"
-            android:text="Parametr: "
+            android:text="Typ leku"
             android:textAlignment="center"
             android:textColor="@color/colorText"
             android:textSize="17sp" />
@@ -31,7 +31,7 @@
             android:id="@+id/wyborRodzajuPomiaruDrug"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:entries="@array/parameters_array"
+            android:entries="@array/drugs_array"
             android:paddingLeft="0dp"
             android:paddingTop="0dp"
             android:paddingRight="0dp"

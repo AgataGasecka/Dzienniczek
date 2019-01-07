@@ -6,186 +6,146 @@
     android:layout_height="match_parent"
     tools:context=".Settings2">
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/wantRemindersAbout"
-        android:textColor="@color/colorText"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        android:onClick="setReminderAboutVisits"
-        android:text="@string/aboutNextVisit"
-        app:layout_constraintBottom_toTopOf="@+id/spinner3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        android:onClick="setReminderAboutMedicines"
-        android:text="@string/aboutTakingMedicines"
-        app:layout_constraintBottom_toTopOf="@+id/spinner4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
-
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        android:onClick="setReminderAboutMeasurement"
-        android:text="@string/aboutMakingMeasurement"
-        app:layout_constraintBottom_toTopOf="@+id/spinner5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner4" />
-
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/normaPomiaru"
         app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="27dp"
         android:text="@string/selectParameter"
         android:textColor="@color/colorText"
-        android:textSize="16dp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toStartOf="@+id/spinner2"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="118dp"
+        android:layout_marginEnd="54dp"
         android:text="@string/norm"
         android:textColor="@color/colorText"
-        android:textSize="16sp"
+        android:textSize="22sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/normaPomiaru"
         app:layout_constraintEnd_toStartOf="@+id/normaPomiaru"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button9"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="133dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="16dp"
         android:onClick="setNewNorm"
         android:text="@string/changeNorm"
-        app:layout_constraintBottom_toTopOf="@+id/editText7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/normaPomiaru"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/button19"
+        app:layout_constraintEnd_toStartOf="@+id/button19"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/normaPomiaru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="30dp"
         android:text="ustalona norma"
-        android:textSize="16sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
-        app:layout_constraintStart_toEndOf="@+id/textView16" />
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/button9"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
     <EditText
         android:id="@+id/editText7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="84dp"
-        android:layout_marginBottom="5dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintBottom_toTopOf="@+id/hint"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button9" />
 
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-
-    <Spinner
-        android:id="@+id/spinner4"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
-
-    <Spinner
-        android:id="@+id/spinner5"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="16dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/button11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
-
     <Button
         android:id="@+id/button11"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginBottom="53dp"
         android:onClick="saveInfo"
-        android:text="Zapisz"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner5"
         tools:ignore="OnClick" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/selectionOfMeasurements"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button19"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="5dp"
+        android:onClick="returnNorm"
+        android:text="@string/returnNorm"
+        app:layout_constraintBottom_toTopOf="@+id/editText7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button9"
+        app:layout_constraintTop_toBottomOf="@+id/normaPomiaru" />
+
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="163dp"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="71dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText7" />
 </android.support.constraint.ConstraintLayout>
