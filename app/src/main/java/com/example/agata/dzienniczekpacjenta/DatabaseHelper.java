@@ -340,4 +340,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor=db.rawQuery(query, new String[]{drugs_type});
         return cursor;
     }
+
+    public Cursor GetUser(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(DatabaseHelper.USERS_TABLE, new String[]{"ID", "NAME", "SURNAME", "BIRTHDAY", "PESEL", "SEX"}, "ID=" + id, null, null, null, null);
+        return cursor;
+    }
 }
