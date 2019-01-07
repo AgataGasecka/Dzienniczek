@@ -3,6 +3,7 @@ package com.example.agata.dzienniczekpacjenta;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,6 @@ public class VisitDetails extends AppCompatActivity {
     String place;
     String info;
     String editMode;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,19 @@ public class VisitDetails extends AppCompatActivity {
         Button addVisit = findViewById(R.id.saveVisitToDb);
         Button updateVisit = findViewById(R.id.button14);
         Button deleteVisit = findViewById(R.id.button15);
+        Button alarmVisit =  findViewById(R.id.button17);
+
+        alarmVisit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent= new Intent(AlarmClock.ACTION_SET_ALARM);
+                intent.putExtra(AlarmClock.EXTRA_HOUR,10);
+                intent.putExtra(AlarmClock.EXTRA_MINUTES,10);
+                startActivity(intent);
+            }
+        });
+
         if (editMode.equals("no")) {
 
             addVisit.setVisibility(View.VISIBLE);
@@ -105,9 +118,17 @@ public class VisitDetails extends AppCompatActivity {
                 place = ((EditText)findViewById(R.id.placesName)).getText().toString().trim();
                 info = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
 
+                Visit updatedVisit = new Visit(visitDate, visitHour, doctor, place, info);
                 helper.updateVisit(visitDate, visitHour, doctor, place, info, visitId);
-                Intent intent = new Intent(VisitDetails.this, ListOfVisits.class);
+                Intent intent = new Intent(VisitDetails.this, Callendar.class);
                 intent.putExtra("ID", id);
+                //intent.putExtra("selectedDate",visitDate);
+                //intent.putExtra( "hourOfVisit", visitHour);
+                //intent.putExtra("doctor", doctor);
+                //intent.putExtra("place", place);
+                //intent.putExtra("visitId", id);
+                //intent.putExtra("info", "brak");
+                //intent.putExtra("editMode", "yes");
                 startActivity(intent);
 
             }
@@ -124,7 +145,7 @@ public class VisitDetails extends AppCompatActivity {
                 info = ((EditText)findViewById(R.id.informationContent)).getText().toString().trim();
 
                 helper.deleteVisit(visitDate, visitHour, doctor, place, info, visitId);
-                Intent intent = new Intent(VisitDetails.this, ListOfVisits.class);
+                Intent intent = new Intent(VisitDetails.this, Callendar.class);
                 intent.putExtra("ID", id);
                 startActivity(intent);
             }

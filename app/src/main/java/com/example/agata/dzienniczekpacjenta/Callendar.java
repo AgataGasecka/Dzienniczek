@@ -18,7 +18,7 @@ public class Callendar extends AppCompatActivity {
      Date dateInCalendar = Calendar.getInstance().getTime();
      SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
      String date = df.format(dateInCalendar);
-     String hour;
+     String hour = "9:00";
      String doctor;
      String place;
      String info;

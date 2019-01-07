@@ -17,7 +17,7 @@ public class Visit {
         this.id = id;
     }
 
-    public Visit(String date, String hour) {
+    public Visit(String date, String hour, String doctor, String place, String info) {
         this.date = date;
         this.hour = hour;
     }
