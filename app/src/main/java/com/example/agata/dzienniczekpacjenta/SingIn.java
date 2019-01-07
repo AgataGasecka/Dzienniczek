@@ -27,11 +27,6 @@ public class SingIn extends AppCompatActivity {
         DatabaseHelper helper = new DatabaseHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
         Cursor cursor = db.query(DatabaseHelper.USERS_TABLE, new String[]{"ID", "EMAIL", "PASSWORD"}, "EMAIL=\"" + email + "\" AND PASSWORD=\"" + password + "\"", null, null, null, null);
-        /*if(cursor != null){
-            cursor.moveToFirst();
-            id = cursor.getInt(cursor.getColumnIndex("ID"));
-        }*/
-
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
             id = cursor.getInt(cursor.getColumnIndex("ID"));

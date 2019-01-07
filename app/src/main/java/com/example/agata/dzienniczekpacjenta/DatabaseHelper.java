@@ -42,6 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Visits_Place = "PLACE";
     public static final String Visits_Info = "INFO";
 
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 2);
     }
@@ -134,7 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateVisit(String visitDate, String visitHour, String doctor, String place, String information, int userId) {
+    public void updateVisit(String visitDate, String visitHour, String doctor, String place, String information, int visitId) {
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             ContentValues contentValues = new ContentValues();
@@ -143,7 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put("DOCTOR", doctor);
             contentValues.put("PLACE", place);
             contentValues.put("INFORMATION", information);
-            db.update(VISITS_TABLE, contentValues, "USER_ID=" + userId, null);
+            db.update(VISITS_TABLE, contentValues, "ID=" + visitId, null);
 
         }
     }

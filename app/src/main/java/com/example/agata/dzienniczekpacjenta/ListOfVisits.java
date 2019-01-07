@@ -38,13 +38,11 @@ public class ListOfVisits extends AppCompatActivity {
             String date = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Visits_Date));
             String hour = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Visits_Hour));
             String doctor = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Visits_Doctor));
-            String place = cursor.getString((cursor.getColumnIndex(mDatabaseHelper.Visits_Place)));
-            int visitId = cursor.getInt((cursor.getColumnIndex("ID")));
+            String place = cursor.getString(cursor.getColumnIndex(mDatabaseHelper.Visits_Place));
+            int visitId = cursor.getInt(cursor.getColumnIndex("ID"));
             String info = "brak";
-            //info = cursor.getString((cursor.getColumnIndex(mDatabaseHelper.Visits_Info)));
 
             addedVisits.add(new Visit(date, hour, doctor, place, info, visitId));
-            //Visit allInformationOfVisit = new Visit(date, hour, doctor, place, info);
         }
         cursor.close();
 
