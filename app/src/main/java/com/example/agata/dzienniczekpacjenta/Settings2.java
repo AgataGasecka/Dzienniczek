@@ -39,6 +39,8 @@ public class Settings2 extends AppCompatActivity {
         newNorm =(EditText) findViewById(R.id.editText7);
         hint = (TextView)findViewById(R.id.hint);
 
+        Toast.makeText(Settings2.this, "Dane zostały zapisane " , Toast.LENGTH_LONG).show();
+
         Spinner spinnerPatameter = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.parameters_array, android.R.layout.simple_spinner_item);
@@ -49,7 +51,7 @@ public class Settings2 extends AppCompatActivity {
         spinnerPatameter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(Settings2.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Settings2.this, "Wybrano opcję " + (parent.getItemAtPosition(position).toString()), Toast.LENGTH_SHORT).show();
                 measurement_type=parent.getItemAtPosition(position).toString();
                 setMeasurementStandard();
                 hideEditTextNewNorm();

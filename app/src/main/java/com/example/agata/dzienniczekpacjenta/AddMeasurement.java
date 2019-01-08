@@ -170,7 +170,7 @@ public class AddMeasurement extends AppCompatActivity {
                 unit.setText("stopnie Celsjusza");
                 break;
             case "Puls":
-                unit.setText("70 uderzeń/min");
+                unit.setText("uderzeń/min");
                 break;
             default:
                 break;
